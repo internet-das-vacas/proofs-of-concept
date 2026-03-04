@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+
+  <title>Prova de conceito - Estoque</title>
+</head>
+
+<body>
+  <h1>Prova de conceito: Estoque</h1>
+
+  <button commandFor="add-expense" command="show-modal">Adicionar despesa</button>
+
+  <section>
+    <h2>Histórico de despesas</h2>
+    <div id="history"></div>
+  </section>
+</body>
+
+<script src="script.js" type="module"></script>
+
+<!-- Action -->
+<dialog id="add-expense" closedby="any">
+  <h1>Adicione uma despesa</h1>
+  <form id="expense">
+    <label for="expenseDate">Data da despesa</label>
+    <input id="expenseDate" name="date" type="date" required />
+
+    <label for="expenseType">Tipo</label>
+    <select id="expenseType" name="type" required>
+      <optgroup label="Alimentação">
+        <option value="feed_roughhage">Volumosos</option>
+        <option value="feed_concentrated">Concentrados</option>
+        <option value="feed_minerals">Minerais</option>
+        <option value="feed_adictives">Aditivos</option>
+        <option value="feed_milk">Aleitamento</option>
+        <option value="feed_others">Outros</option>
+      </optgroup>
+      <optgroup label="Medicamento">
+        <option value="medicine_vaccine">Vacina</option>
+        <option value="medicine_vermifuge">Vermifugo</option>
+        <option value="medicine_others">Outros</option>
+      </optgroup>
+      <optgroup label="Mão de Obra">
+        <option value="labor_workforce">Permanente</option>
+        <option value="labor_outsorced">Terceirizada</option>
+        <option value="labor_technical_assistance">Assistência técnica</option>
+      </optgroup>
+      <optgroup label="Serviços Públicos">
+        <option value="utilities_energy">Energia elétrica</option>
+        <option value="utilities_water">Água e esgoto</option>
+        <option value="utilities_other">Outros</option>
+      </optgroup>
+      <optgroup label="Operação mecânica">
+        <option value="mechanical_diesel">Diesel</option>
+        <option value="mechanical_repair">Reparo</option>
+        <option value="mechanical_transports">Transportes</option>
+      </optgroup>
+      <optgroup label="Despesas Financeiras">
+        <option value="finance_tax">Impostos</option>
+        <option value="finance_fine">Multas</option>
+        <option value="finance_other">Outros</option>
+      </optgroup>
+      <optgroup label="Outros">
+        <option value="other">Outros</option>
+      </optgroup>
+    </select>
+
+    <label for="expenseAmount">Custo</label>
+    <input id="expenseAmount" name="amount" type="number" min="0" required />
+
+    <label for="expenseGoodThrough">Estoque (ou uso) em meses</label>
+    <input id="expenseGoodThrough" name="goodThrough" type="range" value="1" min="1" max="12" list="months" required />
+
+    <section>
+      <button type="button" commandFor="add-expense" command="close">Sair</button>
+      <button type="submit">Adicionar!</button>
+    </section>
+  </form>
+</dialog>
+
+<!-- Support element -->
+<datalist id="months">
+  <option value="1" label="1"></option>
+  <option value="2" label="2"></option>
+  <option value="3" label="3"></option>
+  <option value="4" label="4"></option>
+  <option value="5" label="5"></option>
+  <option value="6" label="6"></option>
+  <option value="7" label="7"></option>
+  <option value="8" label="8"></option>
+  <option value="9" label="9"></option>
+  <option value="10" label="10"></option>
+  <option value="11" label="11"></option>
+  <option value="12" label="12"></option>
+</datalist>
