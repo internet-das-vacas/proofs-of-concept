@@ -5,23 +5,23 @@ const balanceSheet = {
   utilities: { id: 4, description: "Serviços públicos", type: "balance-sheet" },
   mechanical: { id: 5, description: "Operação Mecânica", type: "balance-sheet" },
   finance: { id: 6, description: "Despesas Financeiras", type: "balance-sheet" },
-  other: { id: 7, description: "Outros", type: "balance-sheet" },
+  other: { id: 7, description: "Outros", type: "balance-sheet" }
 };
 
 const inventoryUsage = {
-  inventory: { id: 8, description: "Estoque", type: "inventory-usage" },
+  inventory: { id: 8, description: "Estoque", type: "inventory-usage" }
 };
 
 const profitAndLosses = {
-  purse: { id: 9, description: "Gasto", type: "profit-loss" },
+  purse: { id: 9, description: "Gasto", type: "profit-loss" }
 };
 
 export const model = {
   ...balanceSheet,
   ...inventoryUsage,
-  ...profitAndLosses,
+  ...profitAndLosses
 };
 
 export const defaults = {
-  source: model.purse.id,
+  source: model.purse.id
 };

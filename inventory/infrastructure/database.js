@@ -15,7 +15,7 @@ export const entries_state = {
   },
   get assetsPerDate() {
     return this._data
-      .filter((entry) => entry.type === "asset")
+      .filter((entry) => entry.type === "inflow")
       .reduce((acc, entry) => {
         const date_formatted = entry.date.toLocaleDateString("pt-BR");
         const entries = acc?.[date_formatted]

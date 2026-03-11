@@ -2,7 +2,7 @@
 
 Estoque de entrada + saída quando existem erros eles se tornam uma bola de neve e os usuários estão desconfortáveis com esse caminho pois não tem um controle detalhado de saída.
 
-Hipótese: Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.  
+Hipótese: Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
 
 ## Categorias de custos variáveis
 
@@ -43,12 +43,10 @@ Hipótese: Estoque de entrada com números e de saída com expectativa de duraç
 
 ## Estrutura de dados
 
-Precisamos manter tabs de:
+Precisamos guardar e manter dados de:
 
 - Movimentações financeiras (separar por categorias)
 - Estoques (separar por tipo especifico)
-
-----
 
 Ledgers are conceptually a data model, represented by three entities: Accounts, Entries and Transactions.
 
@@ -66,8 +64,11 @@ Some accounts are meant to be “net credit” and others “net debit”. “Me
 
 ```javascript
 {
-  name: "",
-  type: "balance-sheet" | "profit-loss" | "depreciation" | "inventory-usage" // uma categoria de custo variável é balance sheet, venda de leite seria profit-loss, depreciação vai ganhando valor de bens depreciaveis e inventory vai ganhando valor de bens com estoque
+  [name]: {
+    id: "",
+    description: "",
+    type: "balance-sheet" | "profit-loss" | "depreciation" | "inventory-usage" // uma categoria de custo variável é balance sheet, venda de leite seria profit-loss, depreciação vai ganhando valor de bens depreciaveis e inventory vai ganhando valor de bens com estoque
+  }
 }
 ```
 
@@ -77,13 +78,15 @@ Entries represent the flow of funds between Accounts. Crucially, they are always
 
 ```javascript
 {
+  id: "",
   date: "",
   amount: {
     currency: "BRL",
     cents: 100,
   },
-  type: "liability" | "asset"
+  type: "inflow" | "outflow"
   account_id: "",
+  transaction_id: "",
 }
 ```
 
@@ -97,7 +100,6 @@ Entries are created in pairs, and we use Transactions to make sure that everythi
 - A Transaction that fails partially can be semantically undone with compensating Entries.
 
 ```javascript
-
 // Transaction General object
 {
   date: "",

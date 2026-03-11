@@ -1,5 +1,8 @@
 import * as models_accounts from "../models/accounts.js";
 
+const accountIdFromName = (account_name) =>
+  models_accounts.model?.[account_name].id;
+
 export const transactionObject = (
   transaction_date,
   good_through_date,
@@ -15,7 +18,7 @@ export const transactionObject = (
   finance: {
     accounts: {
       source_id: models_accounts.defaults.source,
-      destination_id: models_accounts.model?.[account_destination].id,
+      destination_id: accountIdFromName(account_destination),
     },
     amount: {
       currency: "BRL",
@@ -43,15 +46,15 @@ export const entriesList = (
       id: crypto.randomUUID(),
       date: entry_date,
       amount: { currency: "BRL", precise: entry_amount },
-      type: "asset",
-      account_id: models_accounts.model?.[account_destination].id,
-      transaction: transaction_id,
+      type: "inflow",
+      account_id: accountIdFromName(account_destination),
+      transaction_id,
     };
 
-    return [{ ...entry }, {
+    return [entry, {
       ...entry,
       id: crypto.randomUUID(),
-      type: "liability",
+      type: "outflow",
       account_id: models_accounts.defaults.source,
     }];
   }).flat();
