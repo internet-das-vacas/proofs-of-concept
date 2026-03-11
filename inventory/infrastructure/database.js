@@ -18,9 +18,7 @@ export const entries_state = {
       .filter((entry) => entry.type === "inflow")
       .reduce((acc, entry) => {
         const date_formatted = entry.date.toLocaleDateString("pt-BR");
-        const entries = acc?.[date_formatted]
-          ? [...acc?.[date_formatted], entry]
-          : [entry];
+        const entries = acc?.[date_formatted] ? [...acc?.[date_formatted], entry] : [entry];
 
         return { ...acc, [date_formatted]: entries };
       }, {});
