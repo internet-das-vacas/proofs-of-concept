@@ -7,19 +7,86 @@
 </head>
 
 <body>
-  <h1>Prova de conceito: Estoque</h1>
+  <nav>
+    <h1>Prova de conceito: Estoque</h1>
+    <button commandFor="add-expense" command="show-modal">Adicionar despesas</button>
+  </nav>
 
-  <button commandFor="add-expense" command="show-modal">Adicionar despesa</button>
+  <article class="container">
+    <h2>Histórico de atividades financeiras</h2>
 
-  <section>
-    <h2>Histórico de despesas</h2>
-    <div id="history"></div>
-  </section>
+    <div id="history" class="history">
+      <section>
+        <h3>10/10/2020 <small>-100,00</small></h3>
+        <ul>
+          <li>
+            <span><strong>-100,00</strong> em Nome da atividade</span>
+            <button>✏️ Editar</button>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>11/10/2020 <small>-100,00</small></h3>
+        <ul>
+          <li>
+            <span><strong>-60,00</strong> em Nome da atividade <small>1/2</small></span>
+            <button>✏️ Editar</button>
+          </li>
+          <li>
+            <span><strong>-40,00</strong> em Nome da atividade</span>
+            <button>✏️ Editar</button>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>01/11/2020 <small>-50,00</small></h3>
+        <ul>
+          <li>
+            <span><strong>-10,00</strong> em Nome da atividade <small>2/2</small></span>
+            <button>✏️ Editar</button>
+          </li>
+          <li>
+            <span><strong>-10,00</strong> em Nome da atividade</span>
+            <button>✏️ Editar</button>
+          </li>
+          <li>
+            <span><strong>-30,00</strong> em Nome da atividade</span>
+            <button>✏️ Editar</button>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </article>
 </body>
 
 <script src="script.js" type="module"></script>
 
-<!-- Action -->
+<!-- Action Edit -->
+<dialog id="edit-expense" closedby="any">
+  <h1>Edite sua despesa</h1>
+  <h2>R$ 200,00 em Nome da Atividade</h2>
+
+  <form id="edit">
+    <label for="editDate">Data da despesa</label>
+    <input id="editDate" name="date" type="date" required />
+
+    <label for="editAmount">Custo</label>
+    <input id="editAmount" name="amount" type="number" min="0" required />
+
+    <label for="editGoodThrough">Estoque (ou uso) em meses</label>
+    <input id="editGoodThrough" name="goodThrough" type="range" value="1" min="0" max="12" list="months" required />
+    <p><small><em>Estoque de zero meses apaga a despesa</em></small></p>
+
+    <section>
+      <button type="button" commandFor="edit-expense" command="close">Sair</button>
+      <button type="submit">✏️ Editar!</button>
+    </section>
+  </form>
+</dialog>
+
+<!-- Action Add -->
 <dialog id="add-expense" closedby="any">
   <h1>Adicione uma despesa</h1>
   <form id="expense">
