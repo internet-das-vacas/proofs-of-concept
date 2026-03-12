@@ -16,47 +16,13 @@
     <h2>Histórico de atividades financeiras</h2>
 
     <div id="history" class="history">
-      <section>
-        <h3>10/10/2020 <small>-100,00</small></h3>
-        <ul>
-          <li>
-            <span><strong>-100,00</strong> em Nome da atividade</span>
-            <button>✏️ Editar</button>
-          </li>
-        </ul>
+
+      <section id="empty">
+        <h3>Sem atividades financeiras cadastradas no momento 💸</h3>
+        <p>Vamos mudar isso? Comece colocando alguma informação de gastos no sistema.</p>
+        <button commandFor="add-expense" command="show-modal">Adicionar despesas agora!</button>
       </section>
 
-      <section>
-        <h3>11/10/2020 <small>-100,00</small></h3>
-        <ul>
-          <li>
-            <span><strong>-60,00</strong> em Nome da atividade <small>1/2</small></span>
-            <button>✏️ Editar</button>
-          </li>
-          <li>
-            <span><strong>-40,00</strong> em Nome da atividade</span>
-            <button>✏️ Editar</button>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h3>01/11/2020 <small>-50,00</small></h3>
-        <ul>
-          <li>
-            <span><strong>-10,00</strong> em Nome da atividade <small>2/2</small></span>
-            <button>✏️ Editar</button>
-          </li>
-          <li>
-            <span><strong>-10,00</strong> em Nome da atividade</span>
-            <button>✏️ Editar</button>
-          </li>
-          <li>
-            <span><strong>-30,00</strong> em Nome da atividade</span>
-            <button>✏️ Editar</button>
-          </li>
-        </ul>
-      </section>
     </div>
   </article>
 </body>
@@ -66,7 +32,7 @@
 <!-- Action Edit -->
 <dialog id="edit-expense" closedby="any">
   <h1>Edite sua despesa</h1>
-  <h2>R$ 200,00 em Nome da Atividade</h2>
+  <h2><span id="editExpenseAmount">R$ 200,00</span> em <span id="editExpenseActivity">Nome da Atividade</span></h2>
 
   <form id="edit">
     <label for="editDate">Data da despesa</label>

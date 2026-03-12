@@ -13,6 +13,8 @@ export const dom = (tag, ...nodes) => {
   if (!element_exists) elements[tag] = document.createElement(tag);
 
   const node = document.importNode(elements[tag]);
-  node.append(...nodes);
+  const nodes_with_content = nodes.filter((node) => !!node);
+
+  node.append(...nodes_with_content);
   return node;
 };

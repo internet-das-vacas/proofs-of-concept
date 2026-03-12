@@ -17,10 +17,9 @@ export const entries_state = {
     return this._data
       .filter((entry) => entry.type === "inflow")
       .reduce((acc, entry) => {
-        const date_formatted = entry.date.toLocaleDateString("pt-BR");
-        const entries = acc?.[date_formatted] ? [...acc?.[date_formatted], entry] : [entry];
+        const entries = acc?.[entry.date] ? [...acc?.[entry.date], entry] : [entry];
 
-        return { ...acc, [date_formatted]: entries };
+        return { ...acc, [entry.date]: entries };
       }, {});
   },
   set content(value) {

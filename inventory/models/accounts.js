@@ -25,3 +25,13 @@ export const model = {
 export const defaults = {
   source: "purse",
 };
+
+const account_by_id = Object.keys(model).reduce(
+  (acc, account_name) => {
+    const account_data = model[account_name];
+    return { ...acc, [account_data.id]: account_data.description };
+  },
+  {},
+);
+
+export const descriptionByID = (id) => account_by_id[id];

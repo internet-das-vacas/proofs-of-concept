@@ -76,6 +76,7 @@ form {
 
     small {
       background-color: antiquewhite;
+      margin-left: 0.5rem;
       padding: 0.25rem 0.5rem;
       border-radius: 1rem;
       color: firebrick;
@@ -107,6 +108,7 @@ form {
 
       strong {
         color: firebrick;
+        margin-right: 0.5rem;
       }
 
       button {
