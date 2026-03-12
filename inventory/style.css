@@ -6,6 +6,11 @@ body {
   background-color: antiquewhite;
 }
 
+span,
+small {
+  line-height: 1;
+}
+
 .container {
   max-width: 800px;
   margin: auto;
@@ -27,7 +32,7 @@ button {
 
   &:last-of-type {
     color: white;
-    background-color: firebrick;
+    background-color: midnightblue;
   }
 }
 
@@ -74,6 +79,7 @@ form {
       padding: 0.25rem 0.5rem;
       border-radius: 1rem;
       color: firebrick;
+      transition: background 0.3s;
     }
 
     ul {
@@ -84,11 +90,18 @@ form {
       li {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 0.5rem;
+        border-radius: 0.75rem;
         transition: background 0.3s;
+        cursor: default;
 
         &:hover {
-          background-color: bisque;
+          background-color: antiquewhite;
+
+          small {
+            background: white;
+          }
         }
       }
 
@@ -100,6 +113,7 @@ form {
         font-size: 0.8rem;
         font-weight: 400;
         padding: 0.25rem 0.5rem;
+        background-color: dodgerblue;
       }
     }
   }
