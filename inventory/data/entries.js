@@ -1,20 +1,11 @@
-export const transactions_state = {
-  _data: {},
-  get content() {
-    return this._data;
-  },
-  set content(value) {
-    this._data = { ...this._data, ...value };
-  },
-};
+const data = [];
 
-export const entries_state = {
-  _data: [],
+export const state = {
   get content() {
-    return this._data;
+    return data;
   },
   get assetsPerDate() {
-    return this._data
+    return data
       .filter((entry) => entry.type === "inflow")
       .reduce((acc, entry) => {
         const entries = acc?.[entry.date] ? [...acc?.[entry.date], entry] : [entry];
@@ -23,6 +14,6 @@ export const entries_state = {
       }, {});
   },
   set content(value) {
-    this._data.push(...value);
+    data.push(...value);
   },
 };

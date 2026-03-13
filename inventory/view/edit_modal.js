@@ -8,7 +8,7 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   const input_amount = document.getElementById("editAmount");
   const input_good_through = document.getElementById("editGoodThrough");
 
-  const transaction = transaction_state.content[transaction_id];
+  const transaction = transaction_state.byID(transaction_id);
   const transaction_value = transaction.finance.amount.precise;
 
   el_edit_form.dataset.transaction_id = transaction_id;

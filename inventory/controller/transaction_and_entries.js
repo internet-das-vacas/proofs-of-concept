@@ -44,12 +44,20 @@ export const update = (event, transaction_state, entries_state) => {
 
   const { date, amount, goodThrough } = infra.html.formResponses(form);
   const transaction_id = form.getAttribute("data-transaction_id");
+  const original_transaction = transaction_state.byID(transaction_id);
+
+  const is_changed = logic.double_entry.is_same_transaction(original_transaction, date, amount, goodThrough);
+  if (!is_changed) return;
+
+  const transaction = logic.double_entry.transaction(
+    date_object,
+    goodThrough,
+    good_through_date_object,
+    tag,
+    account_destination,
+    amount_precise,
+  );
+  transaction_state.content = { [transaction_id]: transaction };
 
   console.log(date, amount, goodThrough, transaction_id);
-
-  // 1 Check if changed (if not do nothing)
-
-  // 2 Anulate original transaction and entries
-
-  // 3 Run storeTransactionAndEntries to add new data
 };

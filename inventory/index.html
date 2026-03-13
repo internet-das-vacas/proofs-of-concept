@@ -9,18 +9,18 @@
 <body>
   <nav>
     <h1>Prova de conceito: Estoque</h1>
-    <button commandFor="add-expense" command="show-modal">Adicionar despesas</button>
+    <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
   </nav>
 
   <article class="container">
-    <h2>Histórico de atividades financeiras</h2>
+    <h2>Histórico de Estoque e Finanças</h2>
 
     <div id="history" class="history">
 
       <section id="empty">
-        <h3>Sem atividades financeiras cadastradas no momento 💸</h3>
-        <p>Vamos mudar isso? Comece colocando alguma informação de gastos no sistema.</p>
-        <button commandFor="add-expense" command="show-modal">Adicionar despesas agora!</button>
+        <h3>Sem atividades de estoque e finanças</h3>
+        <p>Vamos mudar isso? Comece colocando alguma informação de gastos e inventário no sistema.</p>
+        <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
       </section>
 
     </div>
@@ -31,8 +31,8 @@
 
 <!-- Action Edit -->
 <dialog id="edit-expense" closedby="any">
-  <h1>Edite sua despesa</h1>
-  <h2><span id="editExpenseAmount">R$ 200,00</span> em <span id="editExpenseActivity">Nome da Atividade</span></h2>
+  <h1>Edite sua compra e estoque</h1>
+  <h2><span id="editExpenseAmount">R$ 0,00</span> em <span id="editExpenseActivity">Nome da Atividade</span></h2>
 
   <form id="edit">
     <label for="editDate">Data da despesa</label>
@@ -54,9 +54,9 @@
 
 <!-- Action Add -->
 <dialog id="add-expense" closedby="any">
-  <h1>Adicione uma despesa</h1>
+  <h1>Adicione uma compra</h1>
   <form id="expense">
-    <label for="expenseDate">Data da despesa</label>
+    <label for="expenseDate">Data da compra</label>
     <input id="expenseDate" name="date" type="date" required />
 
     <label for="expenseType">Tipo</label>

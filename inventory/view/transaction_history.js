@@ -3,7 +3,6 @@ import * as utils from "../utils/index.js";
 import * as infra from "../infrastructure/index.js";
 
 export const render = (renderTarget, edit_dialog, transaction_state, entries_state) => {
-  const transactions = transaction_state.content;
   const entries = entries_state.assetsPerDate;
   const dates = Object.keys(entries);
 
@@ -21,10 +20,11 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
       const amount_formatted = utils.formatter.preciseToCurrency(-entry.amount.precise);
       const description_text = `em ${models.accounts.descriptionByID(entry.account_id)}`;
 
-      const transaction_lifecycle_in_months = transactions[entry.transaction_id].inventory.lifecycle.in_months;
+      const transaction = transaction_state.byID(entry.transaction_id);
+      const transaction_lifecycle_in_months = transaction.inventory.lifecycle.in_months;
       const hasInstallmentPlan = transaction_lifecycle_in_months > 1;
       const dom_installment = hasInstallmentPlan &&
-        infra.html.dom("small", `${entry.installment}/${transaction_lifecycle_in_months}`);
+        infra.html.dom("small", `duração ${entry.installment}/${transaction_lifecycle_in_months} meses`);
 
       const dom_amount = infra.html.dom("strong", amount_formatted);
       const dom_text_description = infra.html.dom("span", dom_amount, description_text, dom_installment);
