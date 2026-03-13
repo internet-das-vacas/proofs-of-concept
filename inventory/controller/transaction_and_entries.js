@@ -46,8 +46,8 @@ export const update = (event, transaction_state, entries_state) => {
   const transaction_id = form.getAttribute("data-transaction_id");
   const original_transaction = transaction_state.byID(transaction_id);
 
-  const is_changed = logic.double_entry.is_same_transaction(original_transaction, date, amount, goodThrough);
-  if (!is_changed) return;
+  const is_same_transaction = logic.double_entry.is_same_transaction(original_transaction, date, amount, goodThrough);
+  if (is_same_transaction) return;
 
   const transaction = logic.double_entry.transaction(
     date_object,
@@ -58,6 +58,8 @@ export const update = (event, transaction_state, entries_state) => {
     amount_precise,
   );
   transaction_state.content = { [transaction_id]: transaction };
+
+  // TODO: Continue this...
 
   console.log(date, amount, goodThrough, transaction_id);
 };

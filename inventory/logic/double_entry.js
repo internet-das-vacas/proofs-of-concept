@@ -32,15 +32,15 @@ export const transaction = (
 
 export const is_same_transaction = (transaction, date, amount, goodThrough) => {
   const same_lifecycle = goodThrough === transaction.inventory.lifecycle.in_months;
-  if (!same_lifecycle) return true;
+  if (!same_lifecycle) return false;
 
   const same_amount = amount * 100 === transaction.finance.amount.precise;
-  if (!same_amount) return true;
+  if (!same_amount) return false;
 
   const same_date = new Date(date) === new Date(transaction.general.date);
-  if (!same_date) return true;
+  if (!same_date) return false;
 
-  return false;
+  return true;
 };
 
 const entry = (transaction_id, date, amount, installment, type, account_name) => ({
