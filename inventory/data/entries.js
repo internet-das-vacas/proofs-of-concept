@@ -8,7 +8,6 @@ export const state = {
     return data;
   },
   get assetsPerDate() {
-    console.log(data);
     return data
       .filter((entry) => entry.account_id !== models.accounts.accountIDFromName(models.accounts.defaults.source))
       .reduce((acc, entry) => {
