@@ -1,129 +1,136 @@
 <!DOCTYPE html>
+<html lang="pt-br">
 
-<head>
-  <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Prova de conceito - Estoque</title>
-</head>
+    <link rel="stylesheet" href="style.css">
 
-<body>
-  <nav>
-    <h1>Prova de conceito: Estoque</h1>
-    <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
-  </nav>
+    <title>Prova de conceito - Estoque</title>
+  </head>
 
-  <article class="container">
-    <h2>Histórico de Estoque e Finanças</h2>
+  <body>
+    <nav>
+      <h1>Prova de conceito: Estoque</h1>
+      <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
+    </nav>
 
-    <div id="history" class="history">
+    <article class="container">
+      <h2>Histórico de Estoque e Finanças</h2>
 
-      <section id="empty">
-        <h3>Sem atividades de estoque e finanças</h3>
-        <p>Vamos mudar isso? Comece colocando alguma informação de gastos e inventário no sistema.</p>
-        <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
+      <div id="history" class="history">
+
+        <section id="empty">
+          <h3>Sem atividades de estoque e finanças</h3>
+          <p>Vamos mudar isso? Comece colocando alguma informação de gastos e inventário no sistema.</p>
+          <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
+        </section>
+
+      </div>
+    </article>
+  </body>
+
+  <script src="script.js" type="module"></script>
+
+  <!-- Action Edit -->
+  <dialog id="edit-expense" closedby="any">
+    <h1>Edite sua compra e estoque</h1>
+    <form id="edit">
+      <h2><span id="editExpenseAmount">R$ 0,00</span> em <span id="editExpenseActivity">Nome da Atividade</span></h2>
+
+      <label for="editDate">Data da despesa</label>
+      <input id="editDate" name="date" type="date" required />
+
+      <label for="editAmount">Custo</label>
+      <input id="editAmount" name="amount" type="number" min="0" required />
+
+      <label for="editGoodThrough">Estoque (ou uso) em meses</label>
+      <input id="editGoodThrough" name="goodThrough" type="range" value="1" min="0" max="12" list="months" required />
+      <p><small><em>Estoque de zero meses apaga a despesa</em></small></p>
+
+      <section>
+        <button type="button" commandFor="edit-expense" command="close">Sair</button>
+        <button type="submit">✏️ Editar!</button>
       </section>
+    </form>
+  </dialog>
 
-    </div>
-  </article>
-</body>
+  <!-- Action Add -->
+  <dialog id="add-expense" closedby="any">
+    <h1>Adicione uma compra</h1>
+    <form id="expense">
+      <label for="expenseDate">Data da compra</label>
+      <input id="expenseDate" name="date" type="date" required />
 
-<script src="script.js" type="module"></script>
+      <label for="expenseType">Tipo</label>
+      <select id="expenseType" name="type" required>
+        <optgroup label="Alimentação">
+          <option value="feed_roughhage">Volumosos</option>
+          <option value="feed_concentrated">Concentrados</option>
+          <option value="feed_minerals">Minerais</option>
+          <option value="feed_adictives">Aditivos</option>
+          <option value="feed_milk">Aleitamento</option>
+          <option value="feed_others">Outros</option>
+        </optgroup>
+        <optgroup label="Medicamento">
+          <option value="medicine_vaccine">Vacina</option>
+          <option value="medicine_vermifuge">Vermifugo</option>
+          <option value="medicine_others">Outros</option>
+        </optgroup>
+        <optgroup label="Mão de Obra">
+          <option value="labor_workforce">Permanente</option>
+          <option value="labor_outsorced">Terceirizada</option>
+          <option value="labor_technical_assistance">Assistência técnica</option>
+        </optgroup>
+        <optgroup label="Serviços Públicos">
+          <option value="utilities_energy">Energia elétrica</option>
+          <option value="utilities_water">Água e esgoto</option>
+          <option value="utilities_other">Outros</option>
+        </optgroup>
+        <optgroup label="Operação mecânica">
+          <option value="mechanical_diesel">Diesel</option>
+          <option value="mechanical_repair">Reparo</option>
+          <option value="mechanical_transports">Transportes</option>
+        </optgroup>
+        <optgroup label="Despesas Financeiras">
+          <option value="finance_tax">Impostos</option>
+          <option value="finance_fine">Multas</option>
+          <option value="finance_other">Outros</option>
+        </optgroup>
+        <optgroup label="Outros">
+          <option value="other">Outros</option>
+        </optgroup>
+      </select>
 
-<!-- Action Edit -->
-<dialog id="edit-expense" closedby="any">
-  <h1>Edite sua compra e estoque</h1>
-  <form id="edit">
-    <h2><span id="editExpenseAmount">R$ 0,00</span> em <span id="editExpenseActivity">Nome da Atividade</span></h2>
+      <label for="expenseAmount">Custo</label>
+      <input id="expenseAmount" name="amount" type="number" min="0" required />
 
-    <label for="editDate">Data da despesa</label>
-    <input id="editDate" name="date" type="date" required />
+      <label for="expenseGoodThrough">Estoque (ou uso) em meses</label>
+      <input id="expenseGoodThrough" name="goodThrough" type="range" value="1" min="1" max="12" list="months"
+        required />
 
-    <label for="editAmount">Custo</label>
-    <input id="editAmount" name="amount" type="number" min="0" required />
+      <section>
+        <button type="button" commandFor="add-expense" command="close">Sair</button>
+        <button type="submit">Adicionar!</button>
+      </section>
+    </form>
+  </dialog>
 
-    <label for="editGoodThrough">Estoque (ou uso) em meses</label>
-    <input id="editGoodThrough" name="goodThrough" type="range" value="1" min="0" max="12" list="months" required />
-    <p><small><em>Estoque de zero meses apaga a despesa</em></small></p>
+  <!-- Support element -->
+  <datalist id="months">
+    <option value="1" label="1"></option>
+    <option value="2" label="2"></option>
+    <option value="3" label="3"></option>
+    <option value="4" label="4"></option>
+    <option value="5" label="5"></option>
+    <option value="6" label="6"></option>
+    <option value="7" label="7"></option>
+    <option value="8" label="8"></option>
+    <option value="9" label="9"></option>
+    <option value="10" label="10"></option>
+    <option value="11" label="11"></option>
+    <option value="12" label="12"></option>
+  </datalist>
 
-    <section>
-      <button type="button" commandFor="edit-expense" command="close">Sair</button>
-      <button type="submit">✏️ Editar!</button>
-    </section>
-  </form>
-</dialog>
-
-<!-- Action Add -->
-<dialog id="add-expense" closedby="any">
-  <h1>Adicione uma compra</h1>
-  <form id="expense">
-    <label for="expenseDate">Data da compra</label>
-    <input id="expenseDate" name="date" type="date" required />
-
-    <label for="expenseType">Tipo</label>
-    <select id="expenseType" name="type" required>
-      <optgroup label="Alimentação">
-        <option value="feed_roughhage">Volumosos</option>
-        <option value="feed_concentrated">Concentrados</option>
-        <option value="feed_minerals">Minerais</option>
-        <option value="feed_adictives">Aditivos</option>
-        <option value="feed_milk">Aleitamento</option>
-        <option value="feed_others">Outros</option>
-      </optgroup>
-      <optgroup label="Medicamento">
-        <option value="medicine_vaccine">Vacina</option>
-        <option value="medicine_vermifuge">Vermifugo</option>
-        <option value="medicine_others">Outros</option>
-      </optgroup>
-      <optgroup label="Mão de Obra">
-        <option value="labor_workforce">Permanente</option>
-        <option value="labor_outsorced">Terceirizada</option>
-        <option value="labor_technical_assistance">Assistência técnica</option>
-      </optgroup>
-      <optgroup label="Serviços Públicos">
-        <option value="utilities_energy">Energia elétrica</option>
-        <option value="utilities_water">Água e esgoto</option>
-        <option value="utilities_other">Outros</option>
-      </optgroup>
-      <optgroup label="Operação mecânica">
-        <option value="mechanical_diesel">Diesel</option>
-        <option value="mechanical_repair">Reparo</option>
-        <option value="mechanical_transports">Transportes</option>
-      </optgroup>
-      <optgroup label="Despesas Financeiras">
-        <option value="finance_tax">Impostos</option>
-        <option value="finance_fine">Multas</option>
-        <option value="finance_other">Outros</option>
-      </optgroup>
-      <optgroup label="Outros">
-        <option value="other">Outros</option>
-      </optgroup>
-    </select>
-
-    <label for="expenseAmount">Custo</label>
-    <input id="expenseAmount" name="amount" type="number" min="0" required />
-
-    <label for="expenseGoodThrough">Estoque (ou uso) em meses</label>
-    <input id="expenseGoodThrough" name="goodThrough" type="range" value="1" min="1" max="12" list="months" required />
-
-    <section>
-      <button type="button" commandFor="add-expense" command="close">Sair</button>
-      <button type="submit">Adicionar!</button>
-    </section>
-  </form>
-</dialog>
-
-<!-- Support element -->
-<datalist id="months">
-  <option value="1" label="1"></option>
-  <option value="2" label="2"></option>
-  <option value="3" label="3"></option>
-  <option value="4" label="4"></option>
-  <option value="5" label="5"></option>
-  <option value="6" label="6"></option>
-  <option value="7" label="7"></option>
-  <option value="8" label="8"></option>
-  <option value="9" label="9"></option>
-  <option value="10" label="10"></option>
-  <option value="11" label="11"></option>
-  <option value="12" label="12"></option>
-</datalist>
+</html>
