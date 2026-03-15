@@ -7,8 +7,8 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
   const dates = Object.keys(entries);
 
   const dom_sections_by_date = dates.map((date) => {
-    const entries_of_the_day = entries[date];
     const date_formatted = utils.formatter.stringToDate(date);
+    const entries_of_the_day = entries[date];
     const day_amount_precise = entries_of_the_day.reduce((acc, entry) => acc + entry.amount.precise, 0);
     const day_amount_formatted = utils.formatter.preciseToCurrency(-day_amount_precise);
 
@@ -18,7 +18,7 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
 
     const dom_entries_list_items = entries_of_the_day.map((entry) => {
       const amount_formatted = utils.formatter.preciseToCurrency(-entry.amount.precise);
-      const description_text = `em ${models.accounts.descriptionByID(entry.account_id)}`;
+      const description_text = `em ${models.accounts.descriptionFromID(entry.account_id)}`;
 
       const transaction = transaction_state.byID(entry.transaction_id);
       const transaction_lifecycle_in_months = transaction.inventory.lifecycle.in_months;

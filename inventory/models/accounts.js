@@ -29,9 +29,13 @@ export const defaults = {
 const account_by_id = Object.keys(model).reduce(
   (acc, account_name) => {
     const account_data = model[account_name];
-    return { ...acc, [account_data.id]: account_data.description };
+    return { ...acc, [account_data.id]: { ...account_data, name: account_name } };
   },
   {},
 );
 
-export const descriptionByID = (id) => account_by_id[id];
+export const descriptionFromID = (id) => account_by_id[id].description;
+
+export const nameFromID = (id) => account_by_id[id].name;
+
+export const accountIDFromName = (account_name) => model?.[account_name].id;
