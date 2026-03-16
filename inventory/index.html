@@ -7,24 +7,25 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>Prova de conceito - Estoque</title>
+    <title>Prova de conceito: Estoque</title>
   </head>
 
   <body>
     <nav>
-      <h1>Prova de conceito: Estoque</h1>
-      <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
+      <h1><small>Prova de conceito</small>Estoque</h1>
+      <button commandFor="add-expense" command="show-modal">Nova compra ou gasto</button>
     </nav>
 
     <article class="container">
-      <h2>Histórico de Estoque e Finanças</h2>
+      <h2>Histórico de Amortização de gastos</h2>
 
       <div id="history" class="history">
 
         <section id="empty">
-          <h3>Sem atividades de estoque e finanças</h3>
-          <p>Vamos mudar isso? Comece colocando alguma informação de gastos e inventário no sistema.</p>
-          <button commandFor="add-expense" command="show-modal">Adicionar gastos e inventário</button>
+          <h3>Sem atividades de estoque e finanças ainda...</h3>
+          <p>Vamos mudar isso? Comece colocando alguma informação de compras/gastos e inventário no sistema para
+            mostrarmos uma linha do tempo de <strong>amortização de gastos.</strong></p>
+          <button commandFor="add-expense" command="show-modal">Adicionar compra e estoque</button>
         </section>
 
       </div>
@@ -59,6 +60,7 @@
   <!-- Action Add -->
   <dialog id="add-expense" closedby="any">
     <h1>Adicione uma compra</h1>
+    <p>Vamos calcular a sua <strong>amortização de gastos</strong></p>
     <form id="expense">
       <label for="expenseDate">Data da compra</label>
       <input id="expenseDate" name="date" type="date" required />
