@@ -1,8 +1,8 @@
-# Prova de conceito: Estoque
+# Prova de Conceito: Estoque
 
-Estoque de entrada + saída quando existem erros eles se tornam uma bola de neve e os usuários estão desconfortáveis com esse caminho pois não tem um controle detalhado de saída.
+**Problema:** Estoque de entrada + saída: quando existem erros, eles se tornam uma bola de neve. Os usuários estão desconfortáveis com esse caminho pois não têm um controle detalhado de saída.
 
-Hipótese: Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
+**Hipótese:** Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
 
 ## Categorias de custos variáveis
 
@@ -41,26 +41,33 @@ Hipótese: Estoque de entrada com números e de saída com expectativa de duraç
 
 ### Outros
 
+---
+
 ## Estrutura de dados
 
 Precisamos guardar e manter dados de:
 
 - Movimentações financeiras (separar por categorias)
-- Estoques (separar por tipo especifico)
+- Estoques (separar por tipo específico)
 
-Ledgers are conceptually a data model, represented by three entities: Accounts, Entries and Transactions.
+A estrutura segue o modelo de double-entry bookkeeping, representado por três entidades: **Accounts**, **Entries** e **Transactions**.
 
-### Accounts
+> Referências técnicas utilizadas:
+>
+> - [Engineers Do Not Get to Make Startup Decisions — Álvaro Durán](https://news.alvaroduran.com/p/engineers-do-not-get-to-make-startup)
+> - [Accounting for Computer Scientists — Martin Kleppmann](https://martin.kleppmann.com/2011/03/07/accounting-for-computer-scientists.html)
 
-Accounts are both buckets of value, and a particular point of view of how its value changes over time.
+### Accounts (Contas)
 
-In a double-entry system, the collective amount of all non-discarded Entries with type credit and the collective amount of all non-discarded Entries with type debit is the same. Conceptually, this means that no matter how you move money in your pockets, the amount will stay the same.
+Contas são simultaneamente "baldes" de valor e um ponto de vista particular de como esse valor muda ao longo do tempo.
 
-A few special accounts, those that represent the outside world (consolidated into the Profit and Loss statement) are exceptional: They can’t be balanced.
+Num sistema de Double Entry, o total de todos os Lançamentos `entries` não descartados do tipo crédito é igual ao total de todos os Lançamentos do tipo débito. Conceitualmente, isso significa que não importa como você movimenta dinheiro entre seus bolsos — o montante total permanece o mesmo.
 
-It is associated with multiple Entries in a one-to-many relationship, and the total balance should match the aggregation of all its entries’ individual balances.
+Algumas contas `accounts` especiais — aquelas que representam o mundo exterior (consolidadas no Demonstrativo de Resultado - Profit & Loss statement) — são excepcionais: elas não podem ser balanceadas.
 
-Some accounts are meant to be “net credit” and others “net debit”. “Meant to be” is the key here: just because an Account is supposed to be net debit (e.g., the cash in the bank) doesn’t mean it cannot be negative (e.g., overdrawn).
+Uma Conta `account` tem uma relação de um-para-muitos com Lançamentos `entries`, e seu saldo total deve corresponder à agregação dos saldos individuais de todos os seus Lançamentos `entries`.
+
+Algumas contas são "líquido crédito" (net credit) e outras "líquido débito" (net debit). Mas isso é uma expectativa: o fato de uma conta ser normalmente líquido débito (ex: saldo no banco) não impede que ela fique negativa (ex: cheque especial).
 
 ```javascript
 {
@@ -72,9 +79,9 @@ Some accounts are meant to be “net credit” and others “net debit”. “Me
 }
 ```
 
-### Entries
+### Entries (Lançamentos)
 
-Entries represent the flow of funds between Accounts. Crucially, they are always an exchange of value. Therefore, they always come in pairs: an Entry represents one leg of the exchange.
+Lançamentos representam o fluxo de recursos entre Contas `accounts`. Eles são sempre uma troca de valor e, portanto, sempre vêm em pares: cada Lançamento representa uma "perna" da troca.
 
 ```javascript
 {
@@ -84,20 +91,20 @@ Entries represent the flow of funds between Accounts. Crucially, they are always
     currency: "BRL",
     cents: 100,
   },
-  type: "inflow" | "outflow"
+  type: "inflow" | "outflow" // It need a twin of the opposite type
   account_id: "",
   transaction_id: "",
 }
 ```
 
-### Transactions
+### Transactions (Transações)
 
-The way we ensure that Entries are paired correctly is with Transactions. Ledgers shouldn’t interact with Entries directly, but through the Transaction entity.
+Transações `transactions` garantem que os Lançamentos `entries` sejam pareados corretamente. O sistema não deve interagir com Lançamentos diretamente, mas através da entidade Transação `transaction`.
 
-Entries are created in pairs, and we use Transactions to make sure that everything goes how it’s supposed to go:
+Lançamentos são criados em pares, e usamos Transações para garantir que tudo ocorra como esperado:
 
-- A Transaction is posted only when its associated Entries are posted;
-- A Transaction that fails partially can be semantically undone with compensating Entries.
+- Uma Transação só é efetivada quando todos os seus Lançamentos associados são efetivados;
+- Uma Transação que falha parcialmente pode ser semanticamente desfeita com Lançamentos compensatórios.
 
 ```javascript
 // Transaction General object
