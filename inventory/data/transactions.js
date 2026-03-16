@@ -2,11 +2,29 @@ let data = {};
 
 const getSingleTransactionByID = (transaction_id) => data[transaction_id] || {};
 
-const getLatest = (transaction) => {
+const getLatestTransaction = (transaction) => {
   const versions = Object.keys(transaction) || [0];
   const latest = versions.at(-1) || 0;
 
   return latest;
+};
+
+const getTransactionByID = (transaction_id) => {
+  const transaction = getSingleTransactionByID(transaction_id);
+  const latest = getLatestTransaction(transaction);
+
+  return transaction[latest];
+};
+
+const append = (transactionObjectWithIDKey) => {
+  const transaction_id = Object.keys(transactionObjectWithIDKey)[0];
+  const transaction_history = getSingleTransactionByID(transaction_id);
+  const latest = getLatestTransaction(transaction_history);
+
+  data = {
+    ...data,
+    ...{ [transaction_id]: { ...transaction_history, [latest + 1]: transactionObjectWithIDKey[transaction_id] } },
+  };
 };
 
 export const state = {
@@ -17,18 +35,11 @@ export const state = {
 
   // Specialized Gets with parameters
   byID(transaction_id) {
-    const transaction = getSingleTransactionByID(transaction_id);
-    const latest = getLatest(transaction);
-
-    return transaction[latest];
+    return getTransactionByID(transaction_id);
   },
 
   // General Set
   set append(value) {
-    const transaction_id = Object.keys(value)[0];
-    const transaction = getSingleTransactionByID(transaction_id);
-    const latest = getLatest(transaction);
-
-    data = { ...data, ...{ [transaction_id]: { [latest + 1]: value[transaction_id] } } };
+    append(value);
   },
 };

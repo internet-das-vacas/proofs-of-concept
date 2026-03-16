@@ -3,12 +3,12 @@ import * as utils from "../utils/index.js";
 import * as infra from "../infrastructure/index.js";
 
 export const render = (renderTarget, edit_dialog, transaction_state, entries_state) => {
-  const entries = entries_state.assetsPerDate;
-  const dates = Object.keys(entries);
+  const entriesPerDate = entries_state.organizedPerDate;
+  const dates = Object.keys(entriesPerDate);
 
   const dom_sections_by_date = dates.map((date) => {
     const date_formatted = utils.formatter.stringToDate(date);
-    const entries_of_the_day = entries[date];
+    const entries_of_the_day = entriesPerDate[date];
     const day_amount_precise = entries_of_the_day.reduce((acc, entry) => acc + entry.amount.precise, 0);
     const day_amount_formatted = utils.formatter.preciseToCurrency(-day_amount_precise);
 
