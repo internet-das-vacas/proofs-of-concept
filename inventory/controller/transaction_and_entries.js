@@ -1,12 +1,11 @@
 import * as infra from "../infrastructure/index.js";
-import { entries } from "../logic/double_entry.js";
 import * as logic from "../logic/index.js";
 
 const formData = (form_submit_event) => {
   const form = form_submit_event.target;
 
   const { date, type, amount, goodThrough } = infra.html.formResponses(form);
-  const form_information = { date, type, amount, goodThrough };
+  const form_information = { date, type, amount, goodThrough, account_destination: "", tag: "" };
 
   if (type) {
     const [account_destination, tag] = type.split("_");

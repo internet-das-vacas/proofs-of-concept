@@ -1,7 +1,13 @@
 import * as models from "../models/index.js";
 
+/**
+ * @type {Array<models.entry.entry_model>}
+ */
 const data = [];
 
+/**
+ * @returns {{[key: Date]: Array<models.entry.entry_model>}}
+ */
 const entriesPerDate = () =>
   data
     .filter((entry) => entry.account_id !== models.accounts.accountIDFromName(models.accounts.defaults.source))
@@ -25,6 +31,9 @@ const entriesPerDate = () =>
       return acc;
     }, {});
 
+/**
+ * @returns {Array<models.entry.entry_model>}
+ */
 const entriesFromTransaction = (transaction_id) => data.filter((entry) => entry.transaction_id === transaction_id);
 
 const append = (entries) => data.push(...entries);

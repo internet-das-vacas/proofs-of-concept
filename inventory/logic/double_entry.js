@@ -4,6 +4,9 @@ import * as models from "../models/index.js";
 // Transaction
 // -----------
 
+/**
+ * @returns {models.transaction.transaction_model}
+ */
 export const transaction = (
   transaction_date,
   goodThrough,
@@ -49,6 +52,9 @@ export const is_same_transaction = (transaction, date, amount, goodThrough) => {
 // Entry
 // -----
 
+/**
+ * @returns {models.entry.entry_model}
+ */
 const entry = (transaction_id, date, amount, installment, flow, account_name) => ({
   id: crypto.randomUUID(),
   date,

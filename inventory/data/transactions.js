@@ -1,7 +1,13 @@
+import * as models from "../models/index.js";
+
+/**
+ * @type {{[transaction_id: string]: {[version: number]: models.transaction.transaction_model}}}
+ */
 let data = {};
 
-const getSingleTransactionByID = (transaction_id) => data[transaction_id] || {};
-
+/**
+ * @returns {number}
+ */
 const getLatestTransaction = (transaction) => {
   const versions = Object.keys(transaction) || [0];
   const latest = versions.at(-1) || 0;
@@ -9,6 +15,14 @@ const getLatestTransaction = (transaction) => {
   return latest;
 };
 
+/**
+ * @returns {{[version: number]: models.transaction.transaction_model}}
+ */
+const getSingleTransactionByID = (transaction_id) => data[transaction_id] || {};
+
+/**
+ * @returns {models.transaction.transaction_model}
+ */
 const getTransactionByID = (transaction_id) => {
   const transaction = getSingleTransactionByID(transaction_id);
   const latest = getLatestTransaction(transaction);
