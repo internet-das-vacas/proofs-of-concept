@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Prova de conceito: Plugins</title>
+  </head>
+
+  <body>
+    <h1>Começando...</h1>
+  </body>
+
+  <script src="script.js" type="module"></script>
+
+</html>
+
+<!-- 
+# Base functionality
+
+Core must provide
+
+- Access to data
+- Notification system
+- GUI handlers
+
+Maybe provide 2 APIs / method groups?
+
+- One regarding UI / GUI
+- One regarding data
+
+# Triggers
+
+Triggers using event handlers
+
+Example from VSCode that you first register and get it triggered when "action"
+happens as the actions are decided on a script file.
+
+```javascript
+let disposable = vscode.commands.registerCommand(
+  "helloworld.helloWorld",
+  () => {
+    vscode.window.showInformationMessage("Hello World!");
+  },
+);
+
+context.subscriptions.push(disposable);
+```
+
+1 - Register the activation event that will trigger the extension execution
+(Activation Events: events upon which your extension becomes active.)
+
+2 - Uses a contribbution point to interact with VS Code (Contribution Points:
+static declarations that you make in the package.json Extension Manifest to
+extend VS Code.)
+
+3 - Uses VS Code API (VS Code API: a set of JavaScript APIs that you can invoke
+in your extension code.)
+
+# Implementation details
+
+- No DOM Access: we run extensions in an Extension Host process and prevent
+direct access to the DOM.
+- No custom style sheets
+
+TODO: Try to create some generic data structure when possible that the plugins
+can adjust on the go.
+
+# DATA INPUT (forms)
+
+## 1. Add a parameter list to your plugin’s manifest
+
+Each parameter requires a name and a key. The name is the text that appears in
+the UI and the key is used to uniquely identify the value for that parameter
+when your plugin is run.
+
+By default, any time that a parameter-enabled command is triggered by the user,
+the parameter entry UI is launched and the user is asked to provide parameter
+values. This includes all contexts from which a plugin can be run: quick
+actions, context menus, the desktop app menu, etc.
+
+## 2. Add a handler for the figma.parameters.on('input') event to provide suggested parameter values
+
+Your plugin can dynamically provide suggestions as a user types in values for
+parameters. To enable this, your plugin is launched in “query mode,” during
+which it can read from the document, and make network requests, but can’t make
+changes to the document or display visible UI.
+
+## 3. Add a handler for the figma.on('run') event to run your plugin with the selected values
+
+After all parameters have been entered, your plugin is run via the
+figma.on('run') event.
+
+
+-->
