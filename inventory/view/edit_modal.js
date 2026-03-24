@@ -5,6 +5,7 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   const el_value = document.getElementById("editExpenseAmount");
   const el_description = document.getElementById("editExpenseActivity");
   const input_date = document.getElementById("editDate");
+  const input_description = document.getElementById("editDescription");
   const input_amount = document.getElementById("editAmount");
   const input_good_through = document.getElementById("editGoodThrough");
 
@@ -20,6 +21,8 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   input_date.valueAsDate = transaction.general.date;
   input_amount.setAttribute("value", transaction_value / 100);
   input_good_through.setAttribute("value", transaction.inventory.lifecycle.in_months);
+  input_good_through.dispatchEvent(new Event("change"));
+  input_description.setAttribute("value", transaction.general.description.text);
 
   el_edit_form.dataset.transaction_id = transaction_id;
   el_edit_form.dataset.account_destination = transaction_name;

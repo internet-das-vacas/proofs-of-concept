@@ -17,14 +17,16 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
     const dom_date_header = infra.html.dom("h3", date_formatted, dom_day_amount);
 
     const dom_entries_list_items = entries_of_the_day.map((entry) => {
-      const amount_formatted = utils.formatter.preciseToCurrency(-entry.amount.precise);
-      const description_text = `em ${models.accounts.descriptionFromID(entry.account_id)}`;
-
       const transaction = transaction_state.byID(entry.transaction_id);
-      const transaction_lifecycle_in_months = transaction.inventory.lifecycle.in_months;
-      const hasInstallmentPlan = transaction_lifecycle_in_months > 1;
+      const transaction_lifecycle = transaction.inventory.lifecycle.in_months;
+      const transaction_description = transaction.general.description.text || "sem descrição";
+      const amount_formatted = utils.formatter.preciseToCurrency(-entry.amount.precise);
+
+      const description_text = `em ${models.accounts.descriptionFromID(entry.account_id)} (${transaction_description})`;
+
+      const hasInstallmentPlan = transaction_lifecycle > 1;
       const dom_installment = hasInstallmentPlan &&
-        infra.html.dom("small", `duração ${entry.installment}/${transaction_lifecycle_in_months} meses`);
+        infra.html.dom("small", `duração ${entry.installment}/${transaction_lifecycle} meses`);
 
       const dom_amount = infra.html.dom("strong", amount_formatted);
       const dom_text_description = infra.html.dom("span", dom_amount, description_text, dom_installment);

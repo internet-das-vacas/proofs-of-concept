@@ -5,6 +5,7 @@
 /**
  * @typedef {Object} general_description
  * @prop {Array<string>} tags
+ * @prop {string} text
  */
 
 /**

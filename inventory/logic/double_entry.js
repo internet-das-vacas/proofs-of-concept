@@ -11,6 +11,7 @@ export const transaction = (
   transaction_date,
   goodThrough,
   good_through_date,
+  description,
   tag,
   account_destination,
   amount_precise,
@@ -18,7 +19,7 @@ export const transaction = (
   general: {
     date: transaction_date,
     type: "buy",
-    description: { tags: [tag] },
+    description: { tags: [tag], text: description },
   },
   finance: {
     accounts: {
