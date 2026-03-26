@@ -4,42 +4,60 @@
 
 **Hipótese:** Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
 
-## Categorias de custos variáveis
+## Categorias de custos variáveis e amortização
 
-### Alimentação
+### Tipos de amortização
 
-- Volumosos (silagem, pré-secado, feno, pastagem)
-- Concentrados (ração, grãos, farelos)
-- Minerais
-- Aditivos
-- Aleitamento (leite ou sucedâneo)
+- Estoque (ou uso)
+- Recorrente (o mesmo valor todos os meses por um ano)
+- Uso único (mês do pagamento)
+- Anual Regressivo (estoque automatico de um ano para trás)
 
-### Medicamentos
+### Categorias
 
-- Vacina
-- Vermifugo
+#### Alimentação
 
-### Mão de obra
+- Volumosos (silagem, pré-secado, feno, pastagem): Estoque (ou uso)
+- Concentrados (ração, grãos, farelos): Estoque (ou uso)
+- Minerais: Estoque (ou uso)
+- Aditivos: Estoque (ou uso)
+- Aleitamento (leite ou sucedâneo): Estoque (ou uso)
 
-- Permanente
-- Terceirizado
-- Assistência técnica
+#### Medicamentos
 
-### Energia elétrica
+- Vacina: Estoque (ou uso)
+- Vermifugo: Estoque (ou uso)
 
-### Operação mecânica
+#### Mão de obra
 
-- Diesel
-- Reparo
-- Transportes
+- Permanente : Recorrente
+- Terceirizado: Recorrente
+- Assistência técnica: Uso único
 
-### Despesas Financeiras
+#### Serviços públicos
 
-- Juros
-- Impostos
-- Multas
+- Energia elétrica: Uso único
+- Água e esgoto: Uso único
+- Internet: Recorrente
 
-### Outros
+#### Operação mecânica
+
+- Diesel: Estoque (ou uso)
+- Reparo: Uso único
+- Transportes: Uso único
+
+#### Despesas Financeiras
+
+- Juros : Uso único
+- Impostos: Anual Regressivo
+- Multas: Uso único
+
+#### Outros
+
+- Estoque (ou uso)
+- Recorrente (o mesmo valor todos os meses por um ano)
+- Uso único (mês do pagamento)
+- Anual Regressivo (estoque automatico de um ano para trás)
 
 ---
 
