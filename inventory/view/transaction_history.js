@@ -13,7 +13,6 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
     const day_amount_formatted = utils.formatter.preciseToCurrency(-day_amount_precise);
 
     const dom_day_amount = infra.html.dom("small", day_amount_formatted);
-
     const dom_date_header = infra.html.dom("h3", date_formatted, dom_day_amount);
 
     const dom_entries_list_items = entries_of_the_day.map((entry) => {
