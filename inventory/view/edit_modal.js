@@ -10,7 +10,9 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   const input_good_through = document.getElementById("editGoodThrough");
 
   const transaction = transaction_state.byID(transaction_id);
-  const transaction_value = transaction.finance.amount.precise;
+  const amortization = models.amortization.fromTag[transaction.general.description.tags[0]];
+  const goodThrough = transaction.inventory.lifecycle.in_months;
+  const transaction_value = transaction.finance.amount.precise / (amortization === "recurring" ? goodThrough : 1);
   const transaction_value_formatted = utils.formatter.preciseToCurrency(transaction_value);
   const transaction_description = models.accounts.descriptionFromID(transaction.finance.accounts.destination_id);
   const transaction_name = models.accounts.nameFromID(transaction.finance.accounts.destination_id);
@@ -20,8 +22,8 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
 
   input_date.valueAsDate = transaction.general.date;
   input_amount.setAttribute("value", transaction_value / 100);
-  input_good_through.setAttribute("value", transaction.inventory.lifecycle.in_months);
-  input_good_through.dispatchEvent(new Event("change"));
+  input_good_through.setAttribute("value", goodThrough);
+  input_good_through.dispatchEvent(new Event("input"));
   input_description.setAttribute("value", transaction.general.description.text);
 
   el_edit_form.dataset.transaction_id = transaction_id;

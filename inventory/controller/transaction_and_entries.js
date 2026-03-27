@@ -1,5 +1,6 @@
 import * as infra from "../infrastructure/index.js";
 import * as logic from "../logic/index.js";
+import * as models from "../models/index.js";
 
 const formData = (form_submit_event) => {
   const form = form_submit_event.target;
@@ -21,11 +22,16 @@ const formData = (form_submit_event) => {
   return form_information;
 };
 
-const adaptedData = (amount, goodThrough, date, is_a_delete_operation = false) => {
-  const amount_precise = is_a_delete_operation ? 0 : (amount * 100);
+const adaptedData = (amount, tag, goodThrough, date, is_a_delete_operation = false) => {
+  const amortization = models.amortization.fromTag[tag];
+  const ammortized_amount = amortization === "recurring" ? amount * goodThrough : amount;
+
+  const amount_precise = is_a_delete_operation ? 0 : (ammortized_amount * 100);
   const entry_amount = is_a_delete_operation ? 0 : (amount_precise / goodThrough);
 
   const date_object = new Date(date);
+  if (amortization === "regressive") date_object.setFullYear(date_object.getFullYear() - 1);
+
   const date_month = date_object.getMonth();
   const good_through_date_object = new Date(date);
   good_through_date_object.setMonth(date_month + Number(goodThrough));
@@ -36,13 +42,12 @@ const adaptedData = (amount, goodThrough, date, is_a_delete_operation = false) =
 export const create = (event, transaction_state, entries_state) => {
   event.preventDefault();
   const { date, amount, goodThrough, description, account_destination, tag } = formData(event);
-
   const { amount_precise, entry_amount, date_object, date_month, good_through_date_object } = adaptedData(
     amount,
+    tag,
     goodThrough,
     date,
   );
-
   const transaction_id = crypto.randomUUID();
 
   const transaction = logic.double_entry.transaction(
@@ -57,7 +62,7 @@ export const create = (event, transaction_state, entries_state) => {
 
   const entries = logic.double_entry.entries(
     goodThrough,
-    date,
+    date_object,
     date_month,
     entry_amount,
     transaction_id,
@@ -80,6 +85,7 @@ export const update = (event, transaction_state, entries_state) => {
 
   const { amount_precise, entry_amount, date_object, date_month, good_through_date_object } = adaptedData(
     amount,
+    tag,
     goodThrough,
     date,
     is_a_delete_operation,

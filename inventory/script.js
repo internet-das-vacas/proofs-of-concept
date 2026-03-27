@@ -7,9 +7,14 @@ const el_expense_form = document.getElementById("expense");
 const el_expense_dialog = document.getElementById("add-expense");
 const el_edit_form = document.getElementById("edit");
 const el_edit_dialog = document.getElementById("edit-expense");
+const el_type_selector = document.getElementById("expenseType");
 
 const transactions_state = data.transactions.state;
 const entries_state = data.entries.state;
+
+el_type_selector.addEventListener("change", (event) => {
+  view.amortization.set(event);
+});
 
 el_expense_form?.addEventListener("submit", (event) => {
   controller.transaction_and_entries.create(event, transactions_state, entries_state);

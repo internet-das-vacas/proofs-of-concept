@@ -48,7 +48,6 @@
 
 #### Despesas Financeiras
 
-- Juros : Uso único
 - Impostos: Anual Regressivo
 - Multas: Uso único
 
