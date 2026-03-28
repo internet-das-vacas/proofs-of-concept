@@ -4,7 +4,7 @@ import * as infra from "../infrastructure/index.js";
 
 export const render = (renderTarget, edit_dialog, transaction_state, entries_state) => {
   const entriesPerDate = entries_state.organizedPerDate;
-  const dates = Object.keys(entriesPerDate).sort();
+  const dates = Object.keys(entriesPerDate).sort((date_string_a, date_string_b) => (new Date(date_string_a)).getTime() - (new Date(date_string_b))?.getTime());
 
   const dom_sections_by_date = dates.map((date) => {
     const date_formatted = utils.formatter.stringToDate(date);

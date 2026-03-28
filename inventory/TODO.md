@@ -17,3 +17,5 @@
 - [x] 1.1 - Ter uma opção do valor ser recorrente / assinatura e definir a duração e/ou tempo dessa recorrência;
 - [x] 1.2 | 2.1 - Dependendo do que for selecionado em `tipo`, modificar o nome da label do estoque e/ou o seu comportamento;
 - [x] 1.1 | 2.2 - Rever a nomenclatura `custo`, dependendo do que for selecionado em `tipo` (potencialmente adicionar uma tooltip);
+- [x] BUGFIX: Ordem dos itens na lista;
+- [] BUGFIX: Comportamento do contador de meses no modal editar.
