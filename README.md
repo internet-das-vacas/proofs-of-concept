@@ -12,7 +12,13 @@ Estoque de entrada + saída quando existem erros eles se tornam uma bola de neve
 
 [Ver prova de conceito detalhada](./inventory/README.md)
 
-## 2. Primeiros acessos
+## 2. Arquitetura por plugin
+
+Deixar a plataforma o mais plug-and-play possível, com a possibilidade de terceiros criarem plugins e extensões como Figma ou VS Code.
+
+[Ver prova de conceito detalhada](./plugin/README.md)
+
+## 3. Primeiros acessos
 
 > **Prioridade: Alta**
 
@@ -20,19 +26,19 @@ Para fazer o cálculo do COT (Custo Operacional Total), precisamos das informaç
 
 **Hipótese:** As primeiras semanas usando o sistema podem ser as mais complicadas pois é quando o sistema deve ser alimentado com o histórico de bens da propriedade. Como fazer isso o mais simples e intuitivo possível para não afastar os usuários?
 
-## 3. Inventário de bens: Depreciação
+## 4. Inventário de bens: Depreciação
 
 Depreciação é uma parte importante do cálculo financeiro para calcular o Custo Operacional Total.
 
 **Hipótese:** Precisamos testar o sistema e nossas contas ao máximo para garantir que estejam fazendo sentido tecnicamente e para os usuários.
 
-## 4. Inventário de bens: Apreciação
+## 5. Inventário de bens: Apreciação
 
 Terra é um bem que tende a apreciar.
 
 **Hipótese:** Na nossa base teórica terra e apreciação é o que temos menos informações, precisamos nos aprofundar nesse assunto e entender como lidar com ele da melhor forma possível.
 
-## 5. Custo variável: Divisão entre recria e leite
+## 6. Custo variável: Divisão entre recria e leite
 
 > **Prioridade: Baixa**
 
