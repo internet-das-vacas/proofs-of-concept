@@ -1,12 +1,12 @@
 import * as util from "../../../util/index.js";
 const { imports } = util.dependency.dependencies_map;
 
-const { default: moduleFactory } = await import(imports["database/module"]);
+const { default: ModuleFactory } = await import(imports["database/module"]);
 const { OPFSCoopSyncVFS: VirtualFileSystem } = await import(imports["database/virtual-file-system/opfs"]);
 const SQLite = await import(imports["database"]);
 
 // Initialize SQLite.
-const module = await moduleFactory();
+const module = await ModuleFactory();
 const sqlite3 = SQLite.Factory(module);
 
 // Register a custom file system.
