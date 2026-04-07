@@ -1,58 +1,35 @@
 import * as util from "../../../util/index.js";
+const { imports } = util.dependency.dependencies_map;
 
-await util.dependency.importer("database");
+const { default: moduleFactory } = await import(imports["database/module"]);
+const { OPFSCoopSyncVFS: VirtualFileSystem } = await import(imports["database/virtual-file-system/opfs"]);
+const SQLite = await import(imports["database"]);
 
-const logHtml = function (...args) {
-  postMessage({
-    type: "log",
-    payload: { args },
-  });
-};
+// Initialize SQLite.
+const module = await moduleFactory();
+const sqlite3 = SQLite.Factory(module);
 
-const log = (...args) => logHtml(...args);
-const error = (...args) => logHtml(...args);
+// Register a custom file system.
+const vfs = await VirtualFileSystem.create("internet-das-vacas-fs", module);
+sqlite3.vfs_register(vfs, true);
 
-const start = function (sqlite3) {
-  log("Running SQLite3 version", sqlite3.version.libVersion);
-  let db;
-  if ("opfs" in sqlite3) {
-    db = new sqlite3.oo1.OpfsDb("/mydb.sqlite3");
-    log("OPFS is available, created persisted database at", db.filename);
-  } else {
-    db = new sqlite3.oo1.DB("/mydb.sqlite3", "ct");
-    log("OPFS is not available, created transient database", db.filename);
+// Open the database.
+const db = await sqlite3.open_v2("db_name");
+
+const query = `SELECT 'Hello, world!'`;
+
+const results = [];
+for await (const stmt of sqlite3.statements(db, query)) {
+  const rows = [];
+  while (await sqlite3.step(stmt) === SQLite.SQLITE_ROW) {
+    const row = sqlite3.row(stmt);
+    rows.push(row);
   }
-  try {
-    log("Creating a table...");
-    db.exec("CREATE TABLE IF NOT EXISTS t(a,b)");
-    log("Insert some data using exec()...");
-    for (let i = 20; i <= 25; ++i) {
-      db.exec({
-        sql: "INSERT INTO t(a,b) VALUES (?,?)",
-        bind: [i, i * 2],
-      });
-    }
-    log("Query data with exec()...");
-    db.exec({
-      sql: "SELECT a FROM t ORDER BY a LIMIT 3",
-      callback: (row) => {
-        log(row);
-      },
-    });
-  } finally {
-    db.close();
-  }
-};
 
-log("Loading and initializing SQLite3 module...");
-sqlite3InitModule({
-  print: log,
-  printErr: error,
-}).then((sqlite3) => {
-  log("Done initializing. Running demo...");
-  try {
-    start(sqlite3);
-  } catch (err) {
-    error(err.name, err.message);
+  const columns = sqlite3.column_names(stmt);
+  if (columns.length) {
+    results.push({ columns, rows });
   }
-});
+}
+
+console.log(results);

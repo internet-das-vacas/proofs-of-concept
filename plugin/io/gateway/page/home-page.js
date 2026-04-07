@@ -5,9 +5,6 @@ worker_db.addEventListener("error", (error) => {
 });
 
 worker_db.addEventListener("message", ({ data }) => {
-  if (data.type === "error") {
-    console.error(...data.payload.args);
-  } else {
-    console.log(...data.payload.args);
-  }
+  if (data.type === "error") return console.error(...data.payload.args);
+  return console.log(...data.payload.args);
 });

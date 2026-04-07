@@ -1,5 +1,7 @@
 {
   "imports": {
-    "database": "https://esm.sh/@sqlite.org/sqlite-wasm@3.51.2-build8"
+    "database": "https://esm.sh/@journeyapps/wa-sqlite@1.5.0",
+    "database/module": "https://esm.sh/@journeyapps/wa-sqlite@1.5.0/dist/wa-sqlite-async.mjs",
+    "database/virtual-file-system/opfs": "https://esm.sh/@journeyapps/wa-sqlite@1.5.0/src/examples/OPFSCoopSyncVFS.js"
   }
 }
