@@ -5,31 +5,49 @@ const { default: ModuleFactory } = await import(imports["database/module"]);
 const { OPFSCoopSyncVFS: VirtualFileSystem } = await import(imports["database/virtual-file-system/opfs"]);
 const SQLite = await import(imports["database"]);
 
-// Initialize SQLite.
-const module = await ModuleFactory();
-const sqlite3 = SQLite.Factory(module);
+let sqlite3;
+let db;
 
-// Register a custom file system.
-const vfs = await VirtualFileSystem.create("internet-das-vacas-fs", module);
-sqlite3.vfs_register(vfs, true);
+const initialize = async (file_system_name, database_name) => {
+  // Initialize SQLite.
+  const module = await ModuleFactory();
+  sqlite3 = SQLite.Factory(module);
 
-// Open the database.
-const db = await sqlite3.open_v2("db_name");
+  // Register a custom file system.
+  const vfs = await VirtualFileSystem.create(file_system_name, module);
+  sqlite3.vfs_register(vfs, true);
 
-const query = `SELECT 'Hello, world!'`;
+  db = await sqlite3.open_v2(database_name);
+};
 
-const results = [];
-for await (const stmt of sqlite3.statements(db, query)) {
-  const rows = [];
-  while (await sqlite3.step(stmt) === SQLite.SQLITE_ROW) {
-    const row = sqlite3.row(stmt);
-    rows.push(row);
+self.addEventListener("message", async (event) => {
+  const { command, data } = event.data;
+
+  if (command === "initialize") {
+    const { file_system_name, database_name } = data;
+    await initialize(file_system_name, database_name);
+    self.postMessage({ type: "system", data: { command: "initialize", success: true } });
   }
 
-  const columns = sqlite3.column_names(stmt);
-  if (columns.length) {
-    results.push({ columns, rows });
-  }
-}
+  if (command === "query") {
+    const { query } = data;
 
-console.log(results);
+    const results = [];
+    for await (const stmt of sqlite3.statements(db, query)) {
+      const rows = [];
+      while (await sqlite3.step(stmt) === SQLite.SQLITE_ROW) {
+        const row = sqlite3.row(stmt);
+        rows.push(row);
+      }
+
+      const columns = sqlite3.column_names(stmt);
+      if (columns.length) {
+        results.push({ columns, rows });
+      }
+    }
+
+    self.postMessage({ type: "response", data: results });
+  }
+});
+
+self.postMessage({ type: "system", data: { command: "ready", success: true } });

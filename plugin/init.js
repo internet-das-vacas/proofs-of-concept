@@ -1,12 +1,20 @@
+const FILE_SYSTEM_NAME = "internet-das-vacas-fs";
+const DB_NAME = "internet-das-vacas";
+
 const injectDependencies = async () => {
   const util = await import("./util/index.js");
-  const element_script = document.createElement("script");
-  const dependencies_map = await util.dependency.dependencies_map;
+  const { dependencies_map } = util.dependency;
 
+  const element_script = document.createElement("script");
   element_script.type = "importmap";
   element_script.innerText = JSON.stringify(dependencies_map);
-
   document.head.appendChild(element_script);
+};
+
+const adapters = () => {
+  const database_worker = new Worker("./io/adapter/database/database-worker.js", { type: "module" });
+
+  return { database_worker };
 };
 
 const pageGateway = async () => {
@@ -17,15 +25,28 @@ const pageGateway = async () => {
   return start;
 };
 
-const adapters = () => {
-  const database_worker = new Worker("./io/adapter/database/database-worker.js", { type: "module" });
-
-  return { database_worker };
-};
-
-injectDependencies().then(async () => {
+injectDependencies().then(() => {
   const { database_worker } = adapters();
 
-  const start = await pageGateway();
-  start({ database_worker });
+  database_worker.addEventListener("message", async (event) => {
+    const { type, data } = event.data;
+
+    const db_ready = type === "system" && data?.command === "ready" && data?.success === true;
+    if (db_ready) {
+      database_worker.postMessage({
+        command: "initialize",
+        data: { file_system_name: FILE_SYSTEM_NAME, database_name: DB_NAME },
+      });
+    }
+
+    // const db_initialized = type === "system" && data?.command === "initialize" && data?.success === true;
+    const db_initialized = false;
+    if (db_initialized) {
+      const loader_el = document.getElementById("loader");
+      loader_el.remove();
+
+      const start = await pageGateway();
+      start({ database_worker });
+    }
+  });
 });
