@@ -25,6 +25,11 @@ const pageGateway = async () => {
   return start;
 };
 
+const stopLoading = () => {
+  const loader_el = document.getElementById("loader");
+  loader_el.remove();
+};
+
 injectDependencies().then(() => {
   const { database_worker } = adapters();
 
@@ -39,14 +44,14 @@ injectDependencies().then(() => {
       });
     }
 
-    // const db_initialized = type === "system" && data?.command === "initialize" && data?.success === true;
-    const db_initialized = false;
+    const db_initialized = type === "system" && data?.command === "initialize" && data?.success === true;
+    // const db_initialized = false;
     if (db_initialized) {
-      const loader_el = document.getElementById("loader");
-      loader_el.remove();
-
+      const container = document.getElementById("container");
       const start = await pageGateway();
-      start({ database_worker });
+
+      stopLoading();
+      start({ database_worker, element_root: container });
     }
   });
 });
