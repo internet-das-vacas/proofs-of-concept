@@ -11,10 +11,25 @@ const injectDependencies = async () => {
   document.head.appendChild(element_script);
 };
 
-const adapters = () => {
-  const database_worker = new Worker("./io/adapter/database/database-worker.js", { type: "module" });
+const stopLoading = () => {
+  const loader_el = document.getElementById("loader");
+  loader_el.remove();
+};
 
-  return { database_worker };
+const adapters = async () => {
+  const io = await import("./io/index.js");
+
+  const { promise: is_ready, resolve: resolveReady } = Promise.withResolvers();
+
+  const setRediness = () => {
+    stopLoading();
+    resolveReady(true);
+  };
+
+  const database_worker = io.adapter.database.start(FILE_SYSTEM_NAME, DB_NAME, setRediness);
+  const plugin_worker = io.adapter.plugin.start();
+
+  return { database_worker, plugin_worker, is_ready };
 };
 
 const pageGateway = async () => {
@@ -25,33 +40,12 @@ const pageGateway = async () => {
   return start;
 };
 
-const stopLoading = () => {
-  const loader_el = document.getElementById("loader");
-  loader_el.remove();
-};
+injectDependencies().then(async () => {
+  const container = document.getElementById("container");
+  const { database_worker, plugin_worker, is_ready } = await adapters();
 
-injectDependencies().then(() => {
-  const { database_worker } = adapters();
-
-  database_worker.addEventListener("message", async (event) => {
-    const { type, data } = event.data;
-
-    const db_ready = type === "system" && data?.command === "ready" && data?.success === true;
-    if (db_ready) {
-      database_worker.postMessage({
-        command: "initialize",
-        data: { file_system_name: FILE_SYSTEM_NAME, database_name: DB_NAME },
-      });
-    }
-
-    const db_initialized = type === "system" && data?.command === "initialize" && data?.success === true;
-    // const db_initialized = false;
-    if (db_initialized) {
-      const container = document.getElementById("container");
-      const start = await pageGateway();
-
-      stopLoading();
-      start({ database_worker, element_root: container });
-    }
-  });
+  if (await is_ready) {
+    const start = await pageGateway();
+    start({ database_worker, plugin_worker, element_root: container });
+  }
 });

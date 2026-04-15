@@ -20,34 +20,37 @@ const initialize = async (file_system_name, database_name) => {
   db = await sqlite3.open_v2(database_name);
 };
 
+const runQuery = async (query) => {
+  const results = [];
+  for await (const stmt of sqlite3.statements(db, query)) {
+    const rows = [];
+    while (await sqlite3.step(stmt) === SQLite.SQLITE_ROW) {
+      const row = sqlite3.row(stmt);
+      rows.push(row);
+    }
+
+    const columns = sqlite3.column_names(stmt);
+    if (columns.length) {
+      results.push({ columns, rows });
+    }
+  }
+
+  return results;
+};
+
+self.postMessage({ type: "system", data: { command: "ready", success: true } });
+
 self.addEventListener("message", async (event) => {
   const { command, data } = event.data;
+  const { file_system_name, database_name, query } = data;
 
   if (command === "initialize") {
-    const { file_system_name, database_name } = data;
     await initialize(file_system_name, database_name);
     self.postMessage({ type: "system", data: { command: "initialize", success: true } });
   }
 
   if (command === "query") {
-    const { query } = data;
-
-    const results = [];
-    for await (const stmt of sqlite3.statements(db, query)) {
-      const rows = [];
-      while (await sqlite3.step(stmt) === SQLite.SQLITE_ROW) {
-        const row = sqlite3.row(stmt);
-        rows.push(row);
-      }
-
-      const columns = sqlite3.column_names(stmt);
-      if (columns.length) {
-        results.push({ columns, rows });
-      }
-    }
-
+    const results = await runQuery(query);
     self.postMessage({ type: "response", data: results });
   }
 });
-
-self.postMessage({ type: "system", data: { command: "ready", success: true } });

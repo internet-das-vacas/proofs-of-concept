@@ -15,25 +15,31 @@
       <div class="loader"></div>
     </section>
 
+    <h1>Prova de conceito: Plugins</h1>
+    <strong>Ative ou desative um plugin (Marketplace):</strong>
+    <ul>
+      <slot data-type="marketplace"></slot>
+      <li>
+        <input type="checkbox" name="pluginName" id="pluginName" />
+        <label for="pluginName">Novo item no menu</label>
+      </li>
+    </ul>
     <main>
-      <h1>Prova de conceito: Plugins</h1>
-      <strong>Ative ou desative um plugin:</strong>
-      <ul>
-        <li>
-          <input type="checkbox" name="pluginName" id="pluginName" />
-          <label for="pluginName">Nome do plugin</label>
-        </li>
-      </ul>
-      <hr />
-      <div>
-        <aside id="menu">
-          <p>Uma área para ter algum plugin implementando algo...</p>
-        </aside>
-        <section id="container">
-          <!-- JS Controlled -->
-        </section>
-      </div>
-
+      <aside id="menu">
+        <p>Menu</p>
+        <ul>
+          <!-- Plugin controlled -->
+          <slot data-context="menu"></slot>
+        </ul>
+      </aside>
+      <section>
+        <!-- Plugin controlled -->
+        <slot data-context="main_top"></slot>
+        <!-- JS Controlled -->
+        <div id="container"></div>
+        <!-- Plugin controlled -->
+        <slot data-context="main_bottom"></slot>
+      </section>
     </main>
   </body>
 
