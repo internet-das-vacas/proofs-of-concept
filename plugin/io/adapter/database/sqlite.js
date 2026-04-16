@@ -16,5 +16,5 @@ export const start = (file_system_name, database_name, callback_function) => {
     if (db_initialized) callback_function();
   });
 
-  return database_worker;
+  return { database_worker };
 };

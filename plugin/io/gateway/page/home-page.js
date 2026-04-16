@@ -1,4 +1,4 @@
-export const start = ({ database_worker, plugin_worker, element_root }) => {
+export const start = ({ database_worker, element_root }) => {
   database_worker.postMessage({ command: "query", data: { query: `SELECT 'Olar mundo!'` } });
 
   database_worker.addEventListener("message", (event) => {

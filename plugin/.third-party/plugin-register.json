@@ -1,0 +1,9 @@
+{
+  "new_menu_item": {
+    "url": "./.third-party/extensions/menu-item/index.js",
+    "name": "Novo item de menu",
+    "views": ["menu"],
+    "events": [],
+    "data": []
+  }
+}

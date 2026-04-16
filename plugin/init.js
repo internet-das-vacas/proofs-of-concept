@@ -1,6 +1,9 @@
 const FILE_SYSTEM_NAME = "internet-das-vacas-fs";
 const DB_NAME = "internet-das-vacas";
 
+const dom_container = document.getElementById("container");
+const dom_plugin_elements = document.querySelectorAll("slot");
+
 const injectDependencies = async () => {
   const util = await import("./util/index.js");
   const { dependencies_map } = util.dependency;
@@ -18,18 +21,18 @@ const stopLoading = () => {
 
 const adapters = async () => {
   const io = await import("./io/index.js");
-
-  const { promise: is_ready, resolve: resolveReady } = Promise.withResolvers();
+  const { default: PLUGIN_REGISTRY } = await import("./.third-party/plugin-register.json", { with: { type: "json" } });
+  const { promise: is_ready, resolve } = Promise.withResolvers();
 
   const setRediness = () => {
     stopLoading();
-    resolveReady(true);
+    resolve(true);
   };
 
-  const database_worker = io.adapter.database.start(FILE_SYSTEM_NAME, DB_NAME, setRediness);
-  const plugin_worker = io.adapter.plugin.start();
+  const { database_worker } = io.adapter.database.start(FILE_SYSTEM_NAME, DB_NAME, setRediness);
+  const { _plugin_worker, plugin_render_marketplace } = io.adapter.plugin.start(PLUGIN_REGISTRY, dom_plugin_elements);
 
-  return { database_worker, plugin_worker, is_ready };
+  return { is_ready, database_worker, plugin_render_marketplace };
 };
 
 const pageGateway = async () => {
@@ -41,11 +44,11 @@ const pageGateway = async () => {
 };
 
 injectDependencies().then(async () => {
-  const container = document.getElementById("container");
-  const { database_worker, plugin_worker, is_ready } = await adapters();
+  const { database_worker, plugin_render_marketplace, is_ready } = await adapters();
 
   if (await is_ready) {
+    plugin_render_marketplace();
     const start = await pageGateway();
-    start({ database_worker, plugin_worker, element_root: container });
+    start({ database_worker, element_root: dom_container });
   }
 });
