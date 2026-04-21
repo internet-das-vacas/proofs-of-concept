@@ -25,4 +25,4 @@
 - [x] BUGFIX: Ordem dos itens na lista;
 - [ ] BUGFIX: Comportamento do contador de meses no modal editar;
 - [x] 3.1 - Campo de quantidade/peso opcional;
-- [ ] 3.2 - Valor por quantidade/peso no resumo da transação.
+- [x] 3.2 - Valor por quantidade/peso no resumo da transação.

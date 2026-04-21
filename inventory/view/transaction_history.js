@@ -4,7 +4,9 @@ import * as infra from "../infrastructure/index.js";
 
 export const render = (renderTarget, edit_dialog, transaction_state, entries_state) => {
   const entriesPerDate = entries_state.organizedPerDate;
-  const dates = Object.keys(entriesPerDate).sort((date_string_a, date_string_b) => (new Date(date_string_a)).getTime() - (new Date(date_string_b))?.getTime());
+  const dates = Object.keys(entriesPerDate).sort((date_string_a, date_string_b) =>
+    (new Date(date_string_a)).getTime() - (new Date(date_string_b))?.getTime()
+  );
 
   const dom_sections_by_date = dates.map((date) => {
     const date_formatted = utils.formatter.stringToDate(date);
@@ -18,17 +20,28 @@ export const render = (renderTarget, edit_dialog, transaction_state, entries_sta
     const dom_entries_list_items = entries_of_the_day.map((entry) => {
       const transaction = transaction_state.byID(entry.transaction_id);
       const transaction_lifecycle = transaction.inventory.lifecycle.in_months;
-      const transaction_description = transaction.general.description.text || "sem descrição";
       const amount_formatted = utils.formatter.preciseToCurrency(-entry.amount.precise);
 
-      const description_text = `em ${models.accounts.descriptionFromID(entry.account_id)} (${transaction_description})`;
+      const description_text = `em ${models.accounts.descriptionFromID(entry.account_id)}`;
 
       const hasInstallmentPlan = transaction_lifecycle > 1;
       const dom_installment = hasInstallmentPlan &&
-        infra.html.dom("small", `duração ${entry.installment}/${transaction_lifecycle} meses`);
+        infra.html.dom("small", `${entry.installment}/${transaction_lifecycle} meses`);
+
+      const { unit_cost, precise } = transaction.finance.amount;
+      const unit_cost_formatted = utils.formatter.preciseToCurrency(unit_cost);
+      const unit_cost_content = unit_cost === precise ? "" : ` - com custo unitário de ${unit_cost_formatted}`;
+      const transaction_description = `${transaction.general.description.text || "sem descrição"}${unit_cost_content}`;
+      const dom_transaction_info = infra.html.dom("p", transaction_description);
 
       const dom_amount = infra.html.dom("strong", amount_formatted);
-      const dom_text_description = infra.html.dom("span", dom_amount, description_text, dom_installment);
+      const dom_text_description = infra.html.dom(
+        "div",
+        dom_amount,
+        description_text,
+        dom_installment,
+        dom_transaction_info,
+      );
       const dom_edit_button = infra.html.dom("button", "✏️ Editar");
       dom_edit_button.command = "show-modal";
       dom_edit_button.commandForElement = edit_dialog;
