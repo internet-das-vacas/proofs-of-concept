@@ -15,7 +15,7 @@ export const transaction = (
   tag,
   account_destination,
   amount_precise,
-  quantity,
+  quantity = 1,
 ) => ({
   general: {
     date: transaction_date,
@@ -30,11 +30,12 @@ export const transaction = (
     amount: {
       currency: "BRL",
       precise: amount_precise,
+      unit_cost: amount_precise / quantity,
     },
   },
   inventory: {
     lifecycle: { good_through_date, in_months: goodThrough },
-    quantity: { total: quantity, in_months: quantity / goodThrough },
+    quantity,
   },
 });
 

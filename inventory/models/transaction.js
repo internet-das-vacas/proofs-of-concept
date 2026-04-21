@@ -42,15 +42,9 @@
  */
 
 /**
- * @typedef {Object} inventory_quantity
- * @prop {number} total
- * @prop {number} in_months
- */
-
-/**
  * @typedef {Object} inventory
  * @prop {inventory_lifecycle} lifecycle
- * @prop {inventory_quantity}  quantity
+ * @prop {number}  quantity
  */
 
 // ---------------
