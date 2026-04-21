@@ -8,6 +8,7 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   const input_description = document.getElementById("editDescription");
   const input_amount = document.getElementById("editAmount");
   const input_good_through = document.getElementById("editGoodThrough");
+  const input_quantity = document.getElementById("editQuantity");
 
   const transaction = transaction_state.byID(transaction_id);
   const amortization = models.amortization.fromTag[transaction.general.description.tags[0]];
@@ -25,6 +26,7 @@ export const populate = (el_edit_form, transaction_state, transaction_id) => {
   input_good_through.setAttribute("value", goodThrough);
   input_good_through.dispatchEvent(new Event("input"));
   input_description.setAttribute("value", transaction.general.description.text);
+  input_quantity.setAttribute("value", transaction.inventory.input_quantity);
 
   el_edit_form.dataset.transaction_id = transaction_id;
   el_edit_form.dataset.account_destination = transaction_name;
