@@ -151,7 +151,12 @@ Lançamentos são criados em pares, e usamos Transações para garantir que tudo
 {
   transaction_id: "",
   lifecycle: {
-    good_through_date: "" // depreciação para bens e expectativa de duração de estoque para custos variáveis
+    good_through_date: "", // depreciação para bens e expectativa de duração de estoque para custos variáveis
+    in_months: "",         // quantidade de meses entre a transação e a expectativa de fim de vida do estoque 
+  }
+  quantity: {
+    total: 0,     // quantidade de estoque total comprado na transação
+    in_months: 0, // estoque dividido pela quantidade de meses até o fim do ciclo de vida
   }
 }
 ```

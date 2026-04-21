@@ -5,8 +5,8 @@ import * as models from "../models/index.js";
 const formData = (form_submit_event) => {
   const form = form_submit_event.target;
 
-  const { date, type, amount, goodThrough, description } = infra.html.formResponses(form);
-  const form_information = { date, type, amount, goodThrough, description, account_destination: "", tag: "" };
+  const { date, type, amount, goodThrough, description, quantity } = infra.html.formResponses(form);
+  const form_information = { date, type, amount, goodThrough, description, quantity, account_destination: "", tag: "" };
 
   if (type) {
     const [account_destination, tag] = type.split("_");
@@ -41,7 +41,8 @@ const adaptedData = (amount, tag, goodThrough, date, is_a_delete_operation = fal
 
 export const create = (event, transaction_state, entries_state) => {
   event.preventDefault();
-  const { date, amount, goodThrough, description, account_destination, tag } = formData(event);
+
+  const { date, amount, goodThrough, description, quantity, account_destination, tag } = formData(event);
   const { amount_precise, entry_amount, date_object, date_month, good_through_date_object } = adaptedData(
     amount,
     tag,
@@ -58,6 +59,7 @@ export const create = (event, transaction_state, entries_state) => {
     tag,
     account_destination,
     amount_precise,
+    quantity,
   );
 
   const entries = logic.double_entry.entries(
@@ -75,7 +77,9 @@ export const create = (event, transaction_state, entries_state) => {
 
 export const update = (event, transaction_state, entries_state) => {
   event.preventDefault();
-  const { date, amount, goodThrough, description, account_destination, tag, transaction_id } = formData(event);
+  const { date, amount, goodThrough, description, quantity, account_destination, tag, transaction_id } = formData(
+    event,
+  );
 
   const original_transaction = transaction_state.byID(transaction_id);
   const is_same_transaction = logic.double_entry.is_same_transaction(original_transaction, date, amount, goodThrough);
@@ -99,6 +103,7 @@ export const update = (event, transaction_state, entries_state) => {
     tag,
     account_destination,
     amount_precise,
+    quantity,
   );
 
   const transaction_existing_entries = entries_state.byTransactionID(transaction_id);
