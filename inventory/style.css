@@ -4,6 +4,7 @@
 
 body {
   background-color: antiquewhite;
+  line-height: 1.3;
 }
 
 span,
@@ -47,8 +48,10 @@ button {
 }
 
 dialog {
+  box-sizing: border-box;
+  max-width: 100%;
   border: none;
-  padding: 1rem 2rem;
+  padding: 1rem 1.25rem;
   border-radius: 0.5rem;
 }
 
@@ -62,10 +65,19 @@ form {
     margin-top: 1rem;
   }
 
+  fieldset {
+    margin-top: 1rem;
+    border: 0.075rem solid gainsboro;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    padding-top: 0;
+  }
+
   input,
   select {
     font-size: 1rem;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    max-width: 100%;
   }
 }
 

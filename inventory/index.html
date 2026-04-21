@@ -43,11 +43,8 @@
       <label for="editDate">Data da despesa</label>
       <input id="editDate" name="date" type="date" required />
 
-      <label for="editDescription">Descrição (optativo)</label>
-      <input id="editDescription" name="description" />
-
       <label for="editAmount">Custo</label>
-      <input id="editAmount" name="amount" type="number" min="0" required />
+      <input id="editAmount" name="amount" type="number" min="0" step="0.01" required />
 
       <label for="editGoodThrough">Estoque (ou uso) em meses</label>
       <input id="editGoodThrough" name="goodThrough" type="range" value="1" min="0" max="12" list="months" required
@@ -55,6 +52,16 @@
       <span><strong id="editGoodThroughCounter">?</strong> meses</span>
 
       <p><small><em>Estoque de zero meses apaga a despesa</em></small></p>
+
+      <fieldset form="edit">
+        <legend>Campos optativos</legend>
+
+        <label for="editDescription">Descrição</label>
+        <input id="editDescription" name="description" />
+
+        <label for="editQuantity">Quantidade <small>(peso / litros / unidades)</small></label>
+        <input id="editQuantity" name="quantity" type="number" min="0" step="0.01" />
+      </fieldset>
 
       <section>
         <button type="button" commandFor="edit-expense" command="close">Sair</button>
@@ -112,16 +119,23 @@
         </optgroup>
       </select>
 
-      <label for="expenseDescription">Descrição (optativo)</label>
-      <input id="expenseDescription" name="description" />
-
       <label for="expenseAmount">Custo</label>
-      <input id="expenseAmount" name="amount" type="number" min="0" required />
+      <input id="expenseAmount" name="amount" type="number" min="0" step="0.01" required />
 
-      <label for="expenseGoodThrough">Estoque (ou uso) em meses</label>
+      <label for="expenseGoodThrough">Duração estimada em meses <small>(estoque ou uso)</small></label>
       <input id="expenseGoodThrough" name="goodThrough" type="range" value="1" min="1" max="12" list="months" required
         oninput="expenseGoodThroughCounter.innerText = this.value" />
       <span><strong id="expenseGoodThroughCounter">1</strong> meses</span>
+
+      <fieldset form="expense">
+        <legend>Campos optativos</legend>
+
+        <label for="expenseDescription">Descrição</label>
+        <input id="expenseDescription" name="description" />
+
+        <label for="expenseQuantity">Quantidade <small>(peso / litros / unidades)</small></label>
+        <input id="expenseQuantity" name="quantity" type="number" min="0" step="0.01" />
+      </fieldset>
 
       <section>
         <button type="button" commandFor="add-expense" command="close">Sair</button>
