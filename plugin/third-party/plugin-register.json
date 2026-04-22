@@ -1,6 +1,6 @@
 {
   "new_menu_item": {
-    "url": "/repositories/proof-of-concepts/plugin/third-party/extensions/menu-item/index.js",
+    "url": "https://internet-das-vacas.netlify.app/plugin/third-party/extensions/menu-item/index.js",
     "name": "Novo item de menu",
     "views": ["menu"],
     "events": [],
