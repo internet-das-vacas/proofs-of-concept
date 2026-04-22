@@ -21,7 +21,7 @@ const stopLoading = () => {
 
 const adapters = async () => {
   const io = await import("./io/index.js");
-  const { default: PLUGIN_REGISTRY } = await import("./.third-party/plugin-register.json", { with: { type: "json" } });
+  const { default: PLUGIN_REGISTRY } = await import("./third-party/plugin-register.json", { with: { type: "json" } });
   const { promise: is_ready, resolve } = Promise.withResolvers();
 
   const setRediness = () => {
