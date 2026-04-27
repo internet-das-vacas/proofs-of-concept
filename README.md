@@ -1,48 +1,49 @@
 # Provas de conceito: Gestão Financeira
 
-Este documento é um resumo das provas de conceito em andamento. Cada uma investiga uma hipótese específica sobre a gestão financeira de propriedades rurais. As provas estão ordenadas por prioridade.
+Resumo das provas de conceito em andamento e planejadas. Cada uma investiga um problema específico da gestão financeira de propriedades rurais, ordenadas por prioridade.
 
 ## 1. Custos variáveis: Estoque
 
-> **Prioridade: Alta** — Primeira prova de conceito implementada.
+Estoque de entrada + saída: quando existem erros, eles se tornam uma bola de neve. Os usuários estão desconfortáveis com esse caminho pois não têm um controle detalhado de saída.
 
-Estoque de entrada + saída quando existem erros eles se tornam uma bola de neve e os usuários estão desconfortáveis com esse caminho pois não tem um controle detalhado de saída.
-
-**Hipótese:** Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
+**Escopo do experimento:** Estoque de entrada com números e de saída com expectativa de duração pode ser mais fácil.
 
 [Ver prova de conceito detalhada](./inventory/README.md)
 
 ## 2. Arquitetura por plugin
 
-Deixar a plataforma o mais plug-and-play possível, com a possibilidade de terceiros criarem plugins e extensões como Figma ou VS Code.
+A plataforma precisa ser extensível por terceiros — cooperativas, governos, empresas parceiras — sem que o núcleo precise ser alterado para cada nova integração, e sem comprometer a segurança ou a estabilidade do sistema.
+
+**Escopo do experimento:** Um modelo inspirado no VS Code e no Figma, com plugins isolados em Workers e comunicação via API declarada, atende aos requisitos de extensibilidade e segurança.
 
 [Ver prova de conceito detalhada](./plugin/README.md)
 
 ## 3. Primeiros acessos
 
-> **Prioridade: Alta**
+Para calcular o COT (Custo Operacional Total), precisamos das informações de inventário de bens (depreciáveis e apreciáveis). Alimentar o sistema com esse histórico nas primeiras semanas de uso tende a ser a etapa mais trabalhosa e pode afastar os usuários.
 
-Para fazer o cálculo do COT (Custo Operacional Total), precisamos das informações de inventário de bens (depreciáveis e apreciáveis).
+**Desafio:** Como tornar esse processo de onboarding simples e intuitivo o suficiente para não afastar os usuários?
 
-**Hipótese:** As primeiras semanas usando o sistema podem ser as mais complicadas pois é quando o sistema deve ser alimentado com o histórico de bens da propriedade. Como fazer isso o mais simples e intuitivo possível para não afastar os usuários?
+## 4. Inventário de bens: Depreciação e Apreciação
 
-## 4. Inventário de bens: Depreciação
+Depreciação é parte importante do cálculo do COT. Terra é um bem que tende a apreciar, o que exige tratamento diferente dos demais ativos.
 
-Depreciação é uma parte importante do cálculo financeiro para calcular o Custo Operacional Total.
+**Questões em aberto:**
 
-**Hipótese:** Precisamos testar o sistema e nossas contas ao máximo para garantir que estejam fazendo sentido tecnicamente e para os usuários.
+- O modelo de cálculo precisa ser validado técnica e praticamente com usuários reais.
+- Terra e apreciação são os temas com menor cobertura na nossa base teórica — é necessário aprofundar o estudo antes de definir a implementação.
 
-## 5. Inventário de bens: Apreciação
+## 5. Visualização de dados
 
-Terra é um bem que tende a apreciar.
+Sem uma boa visualização de dados históricos, o produtor não consegue conferir lançamentos anteriores, identificar itens não registrados ou comparar preços de produtos ao longo do tempo.
 
-**Hipótese:** Na nossa base teórica terra e apreciação é o que temos menos informações, precisamos nos aprofundar nesse assunto e entender como lidar com ele da melhor forma possível.
+**Escopo do experimento:** Uma visualização dividida por categoria (ex.: alimentação) e subcategoria (ex.: volumoso), com filtros de período, atende às necessidades mais comuns de consulta.
 
 ## 6. Custo variável: Divisão entre recria e leite
 
 > **Prioridade: Baixa**
 
-Para fazer o cálculo de custo com recria, os valores devem ser divididos entre recria e leite.
+Para calcular o custo com recria, os valores devem ser divididos entre recria e leite.
 
 **Problemas a serem resolvidos:**
 
