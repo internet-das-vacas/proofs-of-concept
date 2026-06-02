@@ -33,13 +33,18 @@ const notification = {
 
 const start = async (url) => {
   const { activate, deactivate } = await import(url);
-
   return { activate, deactivate };
 };
 
 const run = async (id, pluginCallback, views_allowed_names) => {
-  const views_allowed = views_allowed_names.reduce((views_obj, name) => ({ ...views_obj, [name]: views[name] }), {});
-  views_allowed.__proto__.callerID = id;
+  const views_allowed = views_allowed_names.reduce(
+    (views_obj, name) => {
+      const metadata = Object.create({ callerID: id });
+      views_obj[name] = Object.assign(metadata, views[name]);
+      return views_obj;
+    },
+    {},
+  );
 
   return await pluginCallback({ views: views_allowed, notification });
 };
