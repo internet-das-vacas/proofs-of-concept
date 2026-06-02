@@ -37,10 +37,12 @@ const start = async (url) => {
 };
 
 const run = async (id, pluginCallback, views_allowed_names) => {
+  const metadata = { callerID: id };
+
   const views_allowed = views_allowed_names.reduce(
     (views_obj, name) => {
-      const metadata = Object.create({ callerID: id });
-      views_obj[name] = Object.assign(metadata, views[name]);
+      views_obj[name] = Object.create(metadata);
+      Object.assign(views_obj[name], views[name]);
       return views_obj;
     },
     {},
