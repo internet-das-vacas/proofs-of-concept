@@ -1,0 +1,8 @@
+{
+  "land_milk_ceil": 40,
+  "land_others_ceil": 8,
+  "land_nature_ceil": 11,
+  "herd_cows_ceil": 80,
+  "herd_heifers_ceil": 33,
+  "herd_calves_ceil": 30
+}
