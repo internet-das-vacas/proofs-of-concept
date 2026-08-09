@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Prova de conceito: Primeiros Passos</title>
+  </head>
+
+  <body>
+    <h1>Primeiros Passos</h1>
+    <h2>Bem vindo ao Internet das Vacas!</h2>
+    <p>Responda algumas perguntas rápidas sobre a sua propriedade para entendermos melhor o seu cenário.</p>
+
+    <form class="container" id="onboardingBase">
+      <h3>Dados basicos</h3>
+      <p>Com essas informações vamos inferir o inventário da sua propriedade</p>
+      <fieldset form="onboardingBase">
+        <legend>Sua propriedade</legend>
+
+        <label for="land_milk">Espaço usado para atividades leiteiras <small>(<strong id="land_milk_counter">10</strong>
+            hectares)</small></label>
+        <input id="land_milk" name="land_milk" type="range" min="0" max="200" value="10"
+          oninput="land_milk_counter.innerText = this.value" />
+
+        <label for="land_others">Espaço para demais atividades <small>(<strong id="land_others_counter">0</strong>
+            hectares)</small></label>
+        <input id="land_others" name="land_others" type="range" min="0" max="200" value="0"
+          oninput="land_others_counter.innerText = this.value" />
+
+        <label for="land_nature">Reserva e terra não aproveitada <small>(<strong id="land_nature_counter">2</strong>
+            hectares)</small></label>
+        <input id="land_nature" name="land_nature" type="range" min="0" max="200" value="2"
+          oninput="land_nature_counter.innerText = this.value" />
+
+      </fieldset>
+
+      <fieldset form="onboardingBase">
+        <legend>Seu rebanho</legend>
+
+        <label for="herd_cows">Vacas em lactação</label>
+        <input id="herd_cows" name="herd_cows" type="number" min="0" step="1" value="10" />
+
+        <label for="herd_heifers">Novilhas em recria</label>
+        <input id="herd_heifers" name="herd_heifers" type="number" min="0" step="1" value="10" />
+
+        <label for="herd_calves">Bezerras (até 12 meses)</label>
+        <input id="herd_calves" name="herd_calves" type="number" min="0" step="1" value="10" />
+      </fieldset>
+    </form>
+
+    <form class="container" id="onboardingInventory">
+      <h3>Dados de inventário</h3>
+      <p>Essas informações são pré-preenchidas baseado nas suas respostas de dados básicos acima
+        (propriedade e rebanho).</p>
+
+      <fieldset form="onboardingInventory">
+        <legend>Construções</legend>
+
+        <details open name="buildings">
+          <summary>Casas / Moradia</summary>
+
+          <label for="casa_s_de_madeira">Casas em madeira <small>(metros quadrados)</small></label>
+          <input id="casa_s_de_madeira" type="number" min="0" value="0" />
+
+          <label for="casa_s_de_alvenaria">Casas em alvenaria <small>(metros quadrados)</small></label>
+          <input id="casa_s_de_alvenaria" type="number" min="0" value="0" />
+        </details>
+
+        <details name="buildings">
+          <summary>Galpões</summary>
+
+          <label for="galpao_deposito">Galpão (deposito) <small>(metros quadrados)</small></label>
+          <input id="galpao_deposito" type="number" min="0" value="0" />
+
+          <label for="galpao_para_feno">Galpão (Feno) <small>(metros quadrados)</small></label>
+          <input id="galpao_para_feno" type="number" min="0" value="0" />
+        </details>
+
+
+        <details name="buildings">
+          <summary>Cercas</summary>
+
+          <label for="cercas_permanentes">Cercas permanentes <small>(metros)</small></label>
+          <input id="cercas_permanentes" type="number" min="0" value="0" />
+
+          <label for="cerca_eletrica">Cerca eletrica <small>(metros)</small></label>
+          <input id="cerca_eletrica" type="number" min="0" value="0" />
+        </details>
+
+        <details name="buildings">
+          <summary>Bezerreiras</summary>
+
+          <label for="bezerreira_movel">Bezerreira móvel <small>(<strong id="bezerreira_movel_counter">0</strong>
+              unidades)</small></label>
+          <input id="bezerreira_movel" type="range" min="0" max="20" value="0"
+            oninput="bezerreira_movel_counter.innerText = this.value" />
+
+          <label for="bezerreira_fixa">Bezerreira fixa <small>(metros quadrados)</small></label>
+          <input id="bezerreira_fixa" type="number" min="0" value="0" />
+        </details>
+
+        <details name="buildings">
+          <summary>Silos</summary>
+
+          <label for="silo_de_superficie">Silo de superficie <small>(metros cúbicos)</small></label>
+          <input id="silo_de_superficie" type="number" min="0" value="0" />
+
+          <label for="silo_trincheira_s_revestimento">Silo Trincheira <small>(metros cúbicos)</small></label>
+          <input id="silo_trincheira_s_revestimento" type="number" min="0" value="0" />
+
+          <label for="silo_metalico_de_racao_graneleiro_vertical">Silo metálico <small>(toneladas)</small></label>
+          <input id="silo_metalico_de_racao_graneleiro_vertical" type="number" min="0" value="0" />
+        </details>
+
+        <details name="buildings">
+          <summary>Leitaria</summary>
+
+          <label for="sala_de_espera">Sala de espera <small>(metros quadrados)</small></label>
+          <input id="sala_de_espera" type="number" min="0" value="0" />
+
+          <label for="sala_do_resfriador">Sala do resfriados <small>(metros quadrados)</small></label>
+          <input id="sala_do_resfriador" type="number" min="0" value="0" />
+
+          <label for="sala_de_ordenha">Sala de ordenha <small>(metros quadrados)</small></label>
+          <input id="sala_de_ordenha" type="number" min="0" value="0" />
+        </details>
+
+        <details name="buildings">
+          <summary>Alimentação e outros</summary>
+
+          <label for="sala_de_alimentacao">Sala de alimentação <small>(metros quadrados)</small></label>
+          <input id="sala_de_alimentacao" type="number" min="0" value="0" />
+
+          <label for="compost_barn">Compost Barn <small>(metros quadrados)</small></label>
+          <input id="compost_barn" type="number" min="0" value="0" />
+
+          <label for="bebedouro">Bebedouros / coxos <small>(<strong id="bebedouro_counter">0</strong>
+              unidades)</small></label>
+          <input id="bebedouro" type="range" min="0" max="20" value="0"
+            oninput="bebedouro_counter.innerText = this.value" />
+        </details>
+
+      </fieldset>
+
+      <fieldset form="onboardingInventory">
+        <legend>Equipamento</legend>
+
+        <label for="ordenhadeira">Tipo de ordenhadeira</label>
+        <select id="ordenhadeira">
+          <option value="">Sem ordenhadeira</option>
+          <option value="ordenhadeira_balde_ao_pe_c_dois_conjuntos">Balde ao pé com dois conjuntos</option>
+          <option value="ordenhadeira_canalizada_c_tres_conjuntos">Canalizada com 3 conjuntos</option>
+          <option value="ordenhadeira_canalizada_c_quatro_conjuntos">Canalizada com 4 conjuntos</option>
+          <option value="ordenhadeira_canalizada_c_seis_conjuntos">Canalizada com 6 conjuntos</option>
+        </select>
+
+        <label for="extrator_de_teteira">Extrator de teteira <small>(<strong id="extrator_de_teteira_counter">0</strong>
+            unidades)</small></label>
+        <input id="extrator_de_teteira" type="range" min="0" max="20" value="0"
+          oninput="extrator_de_teteira_counter.innerText = this.value" />
+
+        <label for="resfriador_c_tanque_de_expansao">Resfriador com tanque de expansão</label>
+        <select id="resfriador_c_tanque_de_expansao">
+          <option value="">Nenhum</option>
+          <option value="500">500 litros</option>
+          <option value="800">800 litros</option>
+          <option value="2000">2.000 litros</option>
+          <option value="5000">5.000 litros</option>
+        </select>
+
+        <label for="pulverizador_de_barras">Pulverizador de barras</label>
+        <select id="pulverizador_de_barras">
+          <option value="">Nenhum</option>
+          <option value="400">400 litros</option>
+          <option value="600">600 litros</option>
+        </select>
+
+        <label for="carreta_3_4_toneladas_1_eixo">Carretão de 3 a 4 toneladas <small>(<strong
+              id="carreta_3_4_toneladas_1_eixo_counter">0</strong>
+            unidades)</small></label>
+        <input id="carreta_3_4_toneladas_1_eixo" type="range" min="0" max="10" value="0"
+          oninput="carreta_3_4_toneladas_1_eixo_counter.innerText = this.value" />
+
+        <label for="carreta_de_6_toneladas_basculante">Carretão de 6 toneladas <small>(<strong
+              id="carreta_de_6_toneladas_basculante_counter">0</strong>
+            unidades)</small></label>
+        <input id="carreta_de_6_toneladas_basculante" type="range" min="0" max="10" value="0"
+          oninput="carreta_de_6_toneladas_basculante_counter.innerText = this.value" />
+
+        <label for="distribuidor_de_esterco_liquido_4000l">Distribuidor de esterco <small>(<strong
+              id="distribuidor_de_esterco_liquido_4000l_counter">0</strong>
+            unidades)</small></label>
+        <input id="distribuidor_de_esterco_liquido_4000l" type="range" min="0" max="10" value="0"
+          oninput="distribuidor_de_esterco_liquido_4000l_counter.innerText = this.value" />
+
+        <label for="gerador">Gerador</label>
+        <select id="gerador">
+          <option value="">Nenhum</option>
+          <option value="6.5">6.5 KV/A</option>
+          <option value="15">15 KV/A</option>
+          <option value="20">20 KV/A</option>
+        </select>
+
+        <label for="motoserra_media">Motossera <small>(<strong id="motoserra_media_counter">0</strong>
+            unidades)</small></label>
+        <input id="motoserra_media" type="range" min="0" max="10" value="0"
+          oninput="motoserra_media_counter.innerText = this.value" />
+
+        <label for="botijao_de_semen">Motossera <small>(<strong id="botijao_de_semen_counter">0</strong>
+            unidades)</small></label>
+        <input id="botijao_de_semen" type="range" min="0" max="5" value="0"
+          oninput="botijao_de_semen_counter.innerText = this.value" />
+
+        <label for="ventiladores_de_3cv_2_2m">Ventilador 3cv <small>(<strong
+              id="ventiladores_de_3cv_2_2m_counter">0</strong>
+            unidades)</small></label>
+        <input id="ventiladores_de_3cv_2_2m" type="range" min="0" max="50" value="0"
+          oninput="ventiladores_de_3cv_2_2m_counter.innerText = this.value" />
+      </fieldset>
+
+      <fieldset form="onboardingInventory">
+        <legend>Maquinário</legend>
+
+        <label for="motocicleta">Motos <small>(<strong id="motocicleta_counter">0</strong>
+            unidades)</small></label>
+        <input id="motocicleta" type="range" min="0" max="5" value="0"
+          oninput="motocicleta_counter.innerText = this.value" />
+
+        <label for="automovel">Carro de passeio / Picape <small>(<strong id="automovel_counter">0</strong>
+            unidades)</small></label>
+        <input id="automovel" type="range" min="0" max="5" value="0"
+          oninput="automovel_counter.innerText = this.value" />
+
+        <label for="trator_pequeno_porte_50_cv_4x4">Trator pequeno (até 50cv) <small>(<strong
+              id="trator_pequeno_porte_50_cv_4x4_counter">0</strong>
+            unidades)</small></label>
+        <input id="trator_pequeno_porte_50_cv_4x4" type="range" min="0" max="5" value="0"
+          oninput="trator_pequeno_porte_50_cv_4x4_counter.innerText = this.value" />
+
+        <label for="trator_medio_porte_65_cv_4x4">Trator médio (65cv) <small>(<strong
+              id="trator_medio_porte_65_cv_4x4_counter">0</strong>
+            unidades)</small></label>
+        <input id="trator_medio_porte_65_cv_4x4" type="range" min="0" max="5" value="0"
+          oninput="trator_medio_porte_65_cv_4x4_counter.innerText = this.value" />
+
+        <label for="trator_medio_porte_75_cv_4x4">Trator médio (75cv) <small>(<strong
+              id="trator_medio_porte_75_cv_4x4_counter">0</strong>
+            unidades)</small></label>
+        <input id="trator_medio_porte_75_cv_4x4" type="range" min="0" max="5" value="0"
+          oninput="trator_medio_porte_75_cv_4x4_counter.innerText = this.value" />
+
+        <label for="trator_medio_porte_85_cv_4x4">Trator médio (85cv) <small>(<strong
+              id="trator_medio_porte_85_cv_4x4_counter">0</strong>
+            unidades)</small></label>
+        <input id="trator_medio_porte_85_cv_4x4" type="range" min="0" max="5" value="0"
+          oninput="trator_medio_porte_85_cv_4x4_counter.innerText = this.value" />
+      </fieldset>
+    </form>
+  </body>
+
+</html>

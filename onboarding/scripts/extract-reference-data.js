@@ -112,6 +112,71 @@ function extractTable(sheet, { headerRow, labelCol, dataStartRow, dataEndRow }) 
   return result;
 }
 
+// Reduz o resultado de extractTable a apenas as chaves listadas em `selection`.
+// Cada valor de `selection` pode ser uma chave única (passa direto) ou uma
+// lista de chaves (soma os valores por sistema em uma única chave de saída).
+function pickFields(data, selection) {
+  const result = {};
+  for (const [outputKey, sources] of Object.entries(selection)) {
+    const sourceKeys = Array.isArray(sources) ? sources : [sources];
+    const entry = { sistema_1: 0, sistema_2: 0, sistema_3: 0, sistema_4: 0, sistema_5: 0 };
+    for (const sourceKey of sourceKeys) {
+      const source = data[sourceKey];
+      if (!source) throw new Error(`Chave "${sourceKey}" não encontrada para montar "${outputKey}"`);
+      for (let n = 1; n <= 5; n++) {
+        entry[`sistema_${n}`] = round2(entry[`sistema_${n}`] + source[`sistema_${n}`]);
+      }
+    }
+    result[outputKey] = entry;
+  }
+  return result;
+}
+
+// Soma grupos de chaves em uma única chave de saída, mantendo intactas as
+// chaves que não fazem parte de nenhum grupo (ao contrário de pickFields,
+// que descarta tudo que não é selecionado).
+function mergeFields(data, merges) {
+  const sourceToOutput = new Map();
+  for (const [outputKey, sourceKeys] of Object.entries(merges)) {
+    for (const sourceKey of sourceKeys) sourceToOutput.set(sourceKey, outputKey);
+  }
+
+  const result = {};
+  const sums = {};
+  for (const [key, value] of Object.entries(data)) {
+    const outputKey = sourceToOutput.get(key);
+    if (!outputKey) {
+      result[key] = value;
+      continue;
+    }
+    sourceToOutput.delete(key);
+    if (!sums[outputKey]) {
+      sums[outputKey] = { sistema_1: 0, sistema_2: 0, sistema_3: 0, sistema_4: 0, sistema_5: 0 };
+      result[outputKey] = sums[outputKey];
+    }
+    for (let n = 1; n <= 5; n++) {
+      sums[outputKey][`sistema_${n}`] = round2(sums[outputKey][`sistema_${n}`] + value[`sistema_${n}`]);
+    }
+  }
+
+  if (sourceToOutput.size > 0) {
+    throw new Error(`Chave(s) não encontrada(s) para mesclar: ${[...sourceToOutput.keys()].join(', ')}`);
+  }
+
+  return result;
+}
+
+// Remove chaves específicas do resultado (ex: um campo cuja unidade não faz
+// sentido somar com os demais).
+function omitFields(data, keys) {
+  const keysToOmit = new Set(keys);
+  const result = {};
+  for (const [key, value] of Object.entries(data)) {
+    if (!keysToOmit.has(key)) result[key] = value;
+  }
+  return result;
+}
+
 function writeJson(fileName, data) {
   const outputPath = `${RESOURCES_DIR}/${fileName}`;
   Deno.writeTextFileSync(outputPath, JSON.stringify(data, null, 2) + '\n');
@@ -121,11 +186,17 @@ function writeJson(fileName, data) {
 function main() {
   const workbook = XLSX.readFile(SPREADSHEET_PATH);
 
-  const herd = extractTable(workbook.Sheets['Anexo Evolucao Rebanho'], {
+  const herdRaw = extractTable(workbook.Sheets['Anexo Evolucao Rebanho'], {
     headerRow: 3, // linha 4
     labelCol: 1, // coluna B
     dataStartRow: 4, // linha 5
     dataEndRow: 21, // linha 22 (ignora a tabela "sem arredondamento" a partir da linha 25)
+  });
+  // Só interessam essas 3 categorias; novilhas em recria é a soma das duas faixas etárias.
+  const herd = pickFields(herdRaw, {
+    vacas_em_lactacao: 'vacas_em_lactacao',
+    novilhas_em_recria: ['novilhas_em_recria_acima_de_24_meses', 'novilhas_em_recria_de_12_a_24_meses'],
+    bezerras_ate_12_meses: 'bezerras_ate_12_meses',
   });
   writeJson('reference_systems_herd.json', herd);
 
@@ -139,13 +210,28 @@ function main() {
 
   const infraestrutura = workbook.Sheets['Infraestrutura'];
 
-  const buildings = extractTable(infraestrutura, {
+  const buildingsRaw = extractTable(infraestrutura, {
     headerRow: 25, // linha 26
     labelCol: 1, // coluna B
     dataStartRow: 26, // linha 27
     dataEndRow: 49, // linha 50 ("BENFEITORIAS UTILIZADAS PELA ATIVIDADE LEITEIRA")
   });
-  writeJson('reference_buildings.json', buildings);
+  const buildings = mergeFields(buildingsRaw, {
+    cercas_permanentes: [
+      'cercas_permanentes_sistema_1',
+      'cercas_permanentes_sistema_2',
+      'cercas_permanentes_sist_3_4_e_5',
+    ],
+    // "cocho de água galvanizado" é medido em metros, não em metros quadrados
+    // como os outros 3, então fica de fora da soma (ver omitFields abaixo).
+    compost_barn: [
+      'compost_barn_area_da_cama',
+      'compost_barn_area_da_pista_de_alimentacao',
+      'compost_barn_area_de_circulacao_e_trato',
+    ],
+  });
+  const buildingsFinal = omitFields(buildings, ['compost_barn_cocho_de_agua_galvanizado']);
+  writeJson('reference_buildings.json', buildingsFinal);
 
   const equipment = extractTable(infraestrutura, {
     headerRow: 55, // linha 56

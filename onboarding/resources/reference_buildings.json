@@ -41,23 +41,9 @@
     "sistema_4": 0,
     "sistema_5": 297.4
   },
-  "cercas_permanentes_sistema_1": {
+  "cercas_permanentes": {
     "sistema_1": 1800,
-    "sistema_2": 0,
-    "sistema_3": 0,
-    "sistema_4": 0,
-    "sistema_5": 0
-  },
-  "cercas_permanentes_sistema_2": {
-    "sistema_1": 0,
     "sistema_2": 2600,
-    "sistema_3": 0,
-    "sistema_4": 0,
-    "sistema_5": 0
-  },
-  "cercas_permanentes_sist_3_4_e_5": {
-    "sistema_1": 0,
-    "sistema_2": 0,
     "sistema_3": 3800,
     "sistema_4": 6400,
     "sistema_5": 8200
@@ -69,33 +55,12 @@
     "sistema_4": 4800,
     "sistema_5": 5700
   },
-  "compost_barn_area_da_cama": {
+  "compost_barn": {
     "sistema_1": 0,
     "sistema_2": 0,
     "sistema_3": 0,
     "sistema_4": 0,
-    "sistema_5": 960
-  },
-  "compost_barn_area_da_pista_de_alimentacao": {
-    "sistema_1": 0,
-    "sistema_2": 0,
-    "sistema_3": 0,
-    "sistema_4": 0,
-    "sistema_5": 224
-  },
-  "compost_barn_area_de_circulacao_e_trato": {
-    "sistema_1": 0,
-    "sistema_2": 0,
-    "sistema_3": 0,
-    "sistema_4": 0,
-    "sistema_5": 256
-  },
-  "compost_barn_cocho_de_agua_galvanizado": {
-    "sistema_1": 0,
-    "sistema_2": 0,
-    "sistema_3": 0,
-    "sistema_4": 0,
-    "sistema_5": 9.6
+    "sistema_5": 1440
   },
   "instalacoes_hidraulicas": {
     "sistema_1": 100,
