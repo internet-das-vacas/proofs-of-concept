@@ -1,0 +1,30 @@
+{
+  "atividade_leiteira": {
+    "sistema_1": 8,
+    "sistema_2": 12,
+    "sistema_3": 18,
+    "sistema_4": 31,
+    "sistema_5": 40
+  },
+  "demais_atividades": {
+    "sistema_1": 2,
+    "sistema_2": 3,
+    "sistema_3": 6,
+    "sistema_4": 8,
+    "sistema_5": 0
+  },
+  "areas_nao_aproveitaveis_ou_reserva": {
+    "sistema_1": 5,
+    "sistema_2": 7,
+    "sistema_3": 11,
+    "sistema_4": 11,
+    "sistema_5": 10
+  },
+  "total": {
+    "sistema_1": 15,
+    "sistema_2": 22,
+    "sistema_3": 35,
+    "sistema_4": 50,
+    "sistema_5": 50
+  }
+}

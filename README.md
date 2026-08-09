@@ -24,6 +24,8 @@ Para calcular o COT (Custo Operacional Total), precisamos das informações de i
 
 **Desafio:** Como tornar esse processo de onboarding simples e intuitivo o suficiente para não afastar os usuários?
 
+[Ver prova de conceito detalhada](./onboarding/README.md)
+
 ## 4. Inventário de bens: Depreciação e Apreciação
 
 Depreciação é parte importante do cálculo do COT. Terra é um bem que tende a apreciar, o que exige tratamento diferente dos demais ativos.

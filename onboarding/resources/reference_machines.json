@@ -1,0 +1,44 @@
+{
+  "motocicleta": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "automovel": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "trator_pequeno_porte_50_cv_4x4": {
+    "sistema_1": 1,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "trator_medio_porte_65_cv_4x4": {
+    "sistema_1": 0,
+    "sistema_2": 1,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "trator_medio_porte_75_cv_4x4": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "trator_medio_porte_85_cv_4x4": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 2
+  }
+}

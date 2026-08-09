@@ -2,5 +2,11 @@
   "fmt": {
     "lineWidth": 120,
     "trailingCommas": "onlyMultiLine"
+  },
+  "imports": {
+    "xlsx": "npm:xlsx@^0.18.5"
+  },
+  "tasks": {
+    "extract-reference-data": "deno run --allow-read --allow-write ./onboarding/scripts/extract-reference-data.js"
   }
 }

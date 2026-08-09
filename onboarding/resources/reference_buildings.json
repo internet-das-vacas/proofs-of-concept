@@ -1,0 +1,170 @@
+{
+  "casa_s_de_madeira": {
+    "sistema_1": 50,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 50,
+    "sistema_5": 70
+  },
+  "casa_s_de_alvenaria": {
+    "sistema_1": 0,
+    "sistema_2": 60,
+    "sistema_3": 90,
+    "sistema_4": 120,
+    "sistema_5": 120
+  },
+  "sala_de_alimentacao": {
+    "sistema_1": 0,
+    "sistema_2": 80,
+    "sistema_3": 140,
+    "sistema_4": 240,
+    "sistema_5": 0
+  },
+  "estabulo_sala_de_ordenha": {
+    "sistema_1": 40,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "galpao_deposito": {
+    "sistema_1": 40,
+    "sistema_2": 80,
+    "sistema_3": 120,
+    "sistema_4": 160,
+    "sistema_5": 200
+  },
+  "galpao_para_feno": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 297.4
+  },
+  "cercas_permanentes_sistema_1": {
+    "sistema_1": 1800,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "cercas_permanentes_sistema_2": {
+    "sistema_1": 0,
+    "sistema_2": 2600,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "cercas_permanentes_sist_3_4_e_5": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 3800,
+    "sistema_4": 6400,
+    "sistema_5": 8200
+  },
+  "cerca_eletrica": {
+    "sistema_1": 2450,
+    "sistema_2": 2850,
+    "sistema_3": 3500,
+    "sistema_4": 4800,
+    "sistema_5": 5700
+  },
+  "compost_barn_area_da_cama": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 960
+  },
+  "compost_barn_area_da_pista_de_alimentacao": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 224
+  },
+  "compost_barn_area_de_circulacao_e_trato": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 256
+  },
+  "compost_barn_cocho_de_agua_galvanizado": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 9.6
+  },
+  "instalacoes_hidraulicas": {
+    "sistema_1": 100,
+    "sistema_2": 200,
+    "sistema_3": 400,
+    "sistema_4": 800,
+    "sistema_5": 900
+  },
+  "bezerreira_movel": {
+    "sistema_1": 2,
+    "sistema_2": 3,
+    "sistema_3": 5,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "bezerreira_fixa": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 30,
+    "sistema_5": 45
+  },
+  "bebedouro": {
+    "sistema_1": 2,
+    "sistema_2": 4,
+    "sistema_3": 6,
+    "sistema_4": 10,
+    "sistema_5": 10
+  },
+  "sala_de_espera": {
+    "sistema_1": 0,
+    "sistema_2": 60,
+    "sistema_3": 105,
+    "sistema_4": 180,
+    "sistema_5": 200
+  },
+  "silo_de_superficie": {
+    "sistema_1": 133.33,
+    "sistema_2": 233.33,
+    "sistema_3": 206.25,
+    "sistema_4": 270.83,
+    "sistema_5": 0
+  },
+  "silo_trincheira_s_revestimento": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 206.25,
+    "sistema_4": 812.5,
+    "sistema_5": 2841.67
+  },
+  "silo_metalico_de_racao_graneleiro_vertical": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 5.67,
+    "sistema_4": 12.2,
+    "sistema_5": 11.95
+  },
+  "sala_do_resfriador": {
+    "sistema_1": 6,
+    "sistema_2": 8,
+    "sistema_3": 10,
+    "sistema_4": 12,
+    "sistema_5": 25
+  },
+  "sala_de_ordenha": {
+    "sistema_1": 0,
+    "sistema_2": 25,
+    "sistema_3": 30,
+    "sistema_4": 35,
+    "sistema_5": 50
+  }
+}

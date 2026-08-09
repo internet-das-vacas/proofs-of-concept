@@ -1,0 +1,51 @@
+{
+  "vacas_em_lactacao": {
+    "sistema_1": 10,
+    "sistema_2": 20,
+    "sistema_3": 35,
+    "sistema_4": 60,
+    "sistema_5": 80
+  },
+  "total_de_vacas": {
+    "sistema_1": 13,
+    "sistema_2": 25,
+    "sistema_3": 43,
+    "sistema_4": 75,
+    "sistema_5": 100
+  },
+  "nascimentos": {
+    "sistema_1": 10,
+    "sistema_2": 19,
+    "sistema_3": 34,
+    "sistema_4": 60,
+    "sistema_5": 86
+  },
+  "novilhas_em_recria_acima_de_24_meses": {
+    "sistema_1": 2,
+    "sistema_2": 3,
+    "sistema_3": 3,
+    "sistema_4": 4,
+    "sistema_5": 5
+  },
+  "novilhas_em_recria_de_12_a_24_meses": {
+    "sistema_1": 3,
+    "sistema_2": 7,
+    "sistema_3": 10,
+    "sistema_4": 20,
+    "sistema_5": 28
+  },
+  "bezerras_ate_12_meses": {
+    "sistema_1": 4,
+    "sistema_2": 8,
+    "sistema_3": 11,
+    "sistema_4": 22,
+    "sistema_5": 30
+  },
+  "bezerros_ate_12_meses": {
+    "sistema_1": 4,
+    "sistema_2": 8,
+    "sistema_3": 11,
+    "sistema_4": 22,
+    "sistema_5": 30
+  },
+}

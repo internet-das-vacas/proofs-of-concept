@@ -1,0 +1,268 @@
+{
+  "ordenhadeira_balde_ao_pe_c_dois_conjuntos": {
+    "sistema_1": 1,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "ordenhadeira_canalizada_c_tres_conjuntos": {
+    "sistema_1": 0,
+    "sistema_2": 1,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "ordenhadeira_canalizada_c_quatro_conjuntos": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "ordenhadeira_canalizada_c_seis_conjuntos": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "extrator_de_teteira": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 6,
+    "sistema_5": 6
+  },
+  "resfriador_c_tanque_de_expansao_500_litros": {
+    "sistema_1": 1,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "resfriador_c_tanque_de_expansao_800_litros": {
+    "sistema_1": 0,
+    "sistema_2": 1,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "resfriador_c_tanque_de_expansao_2_000_litros": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 0
+  },
+  "resfriador_c_tanque_de_expansao_5_000_litros": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 1
+  },
+  "triturador_estacionario_n_2": {
+    "sistema_1": 1,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "motor_eletrico_3_hp_trifasico": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 0
+  },
+  "pulverizador_costal_manual_20_litros": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "pulverizador_de_barras_600_litros": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "pulverizador_de_barras_400_litros": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "grade_aradora_de_14_discos_hidraulica": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "grade_niveladora_de_28_discos_de_arrasto": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "ensiladeira_tratorizada_de_1_linha": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "subsolador_com_5_hastes_fixo": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "carreta_3_4_toneladas_1_eixo": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "carreta_de_6_toneladas_basculante": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 2,
+    "sistema_5": 1
+  },
+  "avassalador_mexedor_de_cama": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 1
+  },
+  "distribuidor_de_ureia_600kg": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "distribuidor_de_esterco_liquido_4000l": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "ferramentas_e_utensilios": {
+    "sistema_1": 0.2,
+    "sistema_2": 0.4,
+    "sistema_3": 0.7,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "gerador": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 6.5,
+    "sistema_4": 15,
+    "sistema_5": 20
+  },
+  "boiler": {
+    "sistema_1": 0,
+    "sistema_2": 100,
+    "sistema_3": 200,
+    "sistema_4": 300,
+    "sistema_5": 400
+  },
+  "concha_dianteira_pca": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "mix_tratador_hidraulico_2m3": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 0,
+    "sistema_5": 0
+  },
+  "vagao_misturador_6m3": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "plantadeira_pd_6_linhas": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 1
+  },
+  "plantadeira_pd_3_linhas": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 0
+  },
+  "plataforma_traseira_para_trator": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "rocadeira_hidraulica_de_trator_1_8m_largura": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "rocadeira_costal_profissional": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "motoserra_media": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "botijao_de_semen": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "lava_jato": {
+    "sistema_1": 1,
+    "sistema_2": 1,
+    "sistema_3": 1,
+    "sistema_4": 1,
+    "sistema_5": 1
+  },
+  "ventiladores_de_3cv_2_2m": {
+    "sistema_1": 0,
+    "sistema_2": 0,
+    "sistema_3": 0,
+    "sistema_4": 0,
+    "sistema_5": 8.29
+  }
+}
